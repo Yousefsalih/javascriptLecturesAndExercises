@@ -2,6 +2,7 @@
 LECTURE: Values and Variables
 1. Declare variables called 'country','continent'and' population' and assign their values according to your own country (population in millions)
 2. Logtheirvaluestotheconsole*/
+'use strict'; //Strict mode forbids us from doing certain things and make it easier for developers to avoid accidental errors and makes it visible. Must be at the very top of the script file.
 
 let country = 'Canada';
 let continent = 'North America';
@@ -42,7 +43,7 @@ age = 31
 
 
 //If you don't declare JS creates property on the global object. It does not declare in the scope such as the above.
-lastName = 'Salih'
+let lastName = 'Salih'
 console.log(lastName)
 
 //Basic Operators +, *, /, -
@@ -236,6 +237,49 @@ if (day === 'monday') {
     console.log('not a valid day!')
 }
 
+//Statements and Expressions
+//Expression produces a value like 3+4
+//Statements: Performs actions but doesn't produce a value like if/else statement
+
+const me = 'Yousef';
+
+console.log(`My name is ${me}!`); //Template literals only except expressions and not statements.
+
+//Conditional (Ternary) Operator
+//It allows us to use a similar format to the if/else statement but all in one line, easier and cleaner
+//Ternary operator has 3 parts (Condition, if, else)
+//Operator always produce a value which means that it is an expression
+//Ternary operator is not a replacement for if/else statements (for bigger blocks of code that needs to be executed based on conditions)
+
+let validAge = 23;
+validAge >= 18 ? console.log('I like to drink coffee') :
+console.log('I like to drink water')
+
+const drink = validAge >= 18 ? 'Drink Coffee' : 'Drink water';
+console.log(drink);
+
+let drink2; //Must declare outside of the if/else statement to have access to it
+
+if (validAge >= 18) {
+    drink2 = 'Drink Milk';
+} else {
+    drink2 = 'Drink water';
+}
+
+console.log(drink2);
+
+console.log(`I like to ${validAge >= 18 ? 'Drink Coffee' : 'Drink water'}`) //Expression is used in a template literal
+
+//Trying out Strict mode
+let hasGovernmentID = false;
+const passTest = true;
+
+if (passTest) hasGovernmentID = true;
+if (hasGovernmentID) console.log('I can drive')
+// const if = 23; Will not work
+
+
+//Functions
 
 
 
