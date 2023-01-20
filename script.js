@@ -195,6 +195,46 @@ if (hasDriversLicense && hasGoodVision && !isTired) {
     console.log('Someone else should drive')
 }
 
+//The Switch Statement
+
+const day = 'monday';
+//Switch statement is not used a lot but it is cleaner then the if else statement in some cases.
+switch(day) {
+    case 'monday': // Day === 'Monday', if true, then the below gets executed
+        console.log('Plan course structure');
+        console.log('Go to coding meetup');
+        break; //Stops the code from executing the remaining lines until the next break exists
+    case 'tuesday':
+        console.log('Prepare theory videos');
+        break;
+    case 'wednesday':
+    case 'thursday':
+        console.log('record videos'); //This works for both Wednesday and Thursday
+        break;
+    case 'friday':
+        console.log('Eat a salad');
+        break;
+    case 'saturday':
+        console.log('Enjoy the weekend');
+        break;
+    case 'sunday':
+        console.log('Do nothing');
+        break;
+    default:
+        console.log('Not a valid day!'); //like the else statement block
+}
+
+//Using if else statement for the same example above
+if (day === 'monday') {
+    console.log('Plan course structure');
+    console.log('Go to coding meetup');
+} else if (day === 'tuesday') {
+    console.log('Prepare theory videos');
+} else if (day === 'wednesday' || day === 'thursday') {
+    console.log('record videos');
+} else {
+    console.log('not a valid day!')
+}
 
 
 
