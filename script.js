@@ -378,7 +378,87 @@ const yearsUntilRetirement2 = function (birthYear, firstName) {
 
 console.log(yearsUntilRetirement2(1929, "Yousef"));
 
+//Arrays - Data Structure
 
+const friend1 = 'Michael';
+const friend2 = 'Steven';
+const friend3 = 'Peter';
+
+const friends = ['Michael', 'Steven', 'Peter']; //Literal syntax
+console.log(friends);
+
+const years = new Array(1991, 1984, 2008, 2020); //Alternatively using the array function with the new keyword
+
+console.log(years);
+console.log(friends[0]);
+console.log(friends.length);
+console.log(friends[friends.length - 1]);
+
+friends[2] = 'Jay' //Only primitive values are immutable. Arrays are not primitive. This mutating the value. But you cannot replace the entire array.
+console.log(friends)
+
+const yousef = ['Yousef', 'Salih', 2023 - 1993, true, friends]; //Different values can be added, including an array
+
+console.log(yousef);
+
+const calcAge5 = function (birthYear) {
+    return 2037 - birthYear;
+};
+
+const years1 = [1990, 1967, 2002, 2010, 2018];
+const ageArray1 = calcAge5(years1[0]);
+const ageArray2 = calcAge5(years1[1]);
+const ageArray3 = calcAge5(years1[2]);
+const ageArray4 = calcAge5(years1[3]);
+const ageArray5 = calcAge5(years1[4]);
+
+console.log(ageArray1, ageArray2, ageArray4);
+
+//Array Operations (Methods)
+
+const newFriends = ["Sam", "Bill", "Jack"];
+const newLength = newFriends.push('Jimmy');
+console.log(newFriends);
+
+const popped = newFriends.pop();
+console.log(popped);
+console.log(newFriends);
+
+console.log(newFriends.indexOf('Sam')); //Finds the index number
+console.log(newFriends.includes('Bob')); //Boolean value
+
+//Objects - Data Structure
+
+const yousefObject = {
+  firstName: "Yousef",
+  lastName: "Salih",
+  job: "Front-End Developer",
+  friends: ["Sam", "Bill", "Jack"]
+};
+
+console.log(yousefObject);
+
+//Dot Notation Vs. Bracket Notation
+
+console.log(yousefObject.firstName); //Dot notation
+console.log(yousefObject['lastName'])//Bracket notation
+
+const nameKey1 = 'Name'
+console.log(yousefObject["last" + nameKey1]);
+console.log(yousefObject["first" + nameKey1]);
+
+const interestedIn = prompt('What do you want to know about Yousef? Choose between firstName, lastName, job, and friends');
+
+if (yousefObject[interestedIn]) {
+    alert(yousefObject[interestedIn]);
+} else {
+    alert('Choose from the options available!')
+}
+
+yousefObject.location = 'Vancouver';
+yousefObject['myDrink'] = 'coffee';
+
+console.log(`${yousefObject.firstName} has ${yousefObject.friends.length} friends and his best friend is called ${yousefObject.friends[2]}`);
 
 
 /* This is a way to comment out code */
