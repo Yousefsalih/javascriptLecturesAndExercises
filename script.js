@@ -280,6 +280,104 @@ if (hasGovernmentID) console.log('I can drive')
 
 
 //Functions
+function logger() {
+    console.log('My name is Jonas') //function body
+}
+
+logger(); //calling/running/invoking function
+
+function fruitProcessor(apples, oranges) { //apples and oranges are parameters (placeholders) 
+    console.log(apples, oranges);
+    const juice = `Juice with ${apples} apples and ${oranges} oranges.`;
+    return juice;
+    console.log(juice); //This will not work
+};
+
+fruitProcessor(5, 0);
+console.log(fruitProcessor(5, 0));
+//Alternatively
+const appleJuice = fruitProcessor(5, 0);
+console.log(appleJuice);
+
+const appleOrangeJuice = fruitProcessor(2, 4) // 2 and 4 are values passed on as arguments
+
+
+//Function Declarations vs Expressions
+
+//Function declarations can be declared before defining it (before initialization) due to hoisting whereas function expressions cannot.
+
+//Function declaration
+function calcAge1(birthYear) {
+    //One way:
+    // const ageCalc = 2037 - birthYear
+    // return ageCalc
+    //Better way:
+    return 2037 - birthYear;
+};
+
+const age1 = calcAge1(1991);
+console.log(age1)
+
+//Function Expression
+const calcAge2 = function (birthYear) { //Stored in the variable 'calcAge2' which will be the function reference. However, the function itself is considered to be an expression which produces a value and it is considered an anonymous function. Functions are not a type.
+    return 2038 - birthYear;
+};
+
+const age2 = calcAge2(1990);
+
+console.log(age2)
+
+//Arrow function - faster version of a function expression. Arrow functions do not get a 'this' keyword.
+
+const calcAge3 = birthYear => 2037 - birthYear; //No need for the return keyword
+const age3 = calcAge3(1989);
+console.log(age3);
+
+const yearsUntilRetirement = (birthYear, firstName) => {
+    const age = 2037 - birthYear;
+    const retirement = 65 - age;
+    // return retirement;
+    return `${firstName} retires in ${retirement} years`
+}
+
+console.log(yearsUntilRetirement(1989, 'Yousef'));
+
+//Functions calling another function
+
+function cutFruitPieces(fruit) { //#4, #8
+    return fruit * 4; //#5 #9
+};
+
+function fruitProcessor2 (apples, oranges) { //apples and oranges are parameters (placeholders). #2 
+    console.log(apples, oranges);
+    const orangePieces = cutFruitPieces(apples); //#3, #6
+    const applePieces = cutFruitPieces(oranges); //#7 #10
+    const juice = `Juice with ${applePieces} apples and ${orangePieces} oranges.`; //#11
+    return juice; //#12
+    console.log(juice); //This will not work
+};
+
+console.log(fruitProcessor2(2, 3)); //#1 #13
+
+const calcAge4 = function (birthYear) {
+    return 2037 - birthYear;
+};
+
+//Console.log must show up before the return (exits)
+const yearsUntilRetirement2 = function (birthYear, firstName) {
+  const age = calcAge4(birthYear);
+  const retirement = 65 - age;
+  if (retirement > 0) {
+    console.log(`${firstName} retires in ${retirement} years`);
+    return retirement
+  } else {
+    console.log(`${firstName} has already retired`);
+    return -1;
+    };
+};
+
+console.log(yearsUntilRetirement2(1929, "Yousef"));
+
 
 
 
