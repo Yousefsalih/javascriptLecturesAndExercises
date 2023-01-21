@@ -460,6 +460,123 @@ yousefObject['myDrink'] = 'coffee';
 
 console.log(`${yousefObject.firstName} has ${yousefObject.friends.length} friends and his best friend is called ${yousefObject.friends[2]}`);
 
+//Object Methods
+
+const yousefObject1 = {
+    firstName: "Yousef",
+    lastName: "Salih",
+    job: "Front-End Developer",
+    friends: ["Sam", "Bill", "Jack"],
+    hasDriversLicense: true,
+    birthYear: 1990,
+//   calcAge: function (birthYear) { //Methods needs function expression and not function declaration. Property that holds a function value.
+//     return 2037 - birthYear
+//   }
+    calcAge: function () { 
+        return 2037 - this.birthYear;
+  },
+    getSummary: function () {
+        return `${this.firstName} is a ${this.calcAge()} year old ${yousefObject1.job} and he has ${this.hasDriversLicense ? 'a' : 'no'} driver's license. `
+  }
+};
+
+console.log(yousefObject1.calcAge());
+console.log(yousefObject1.getSummary())
+
+//Iteration: For Loop - keeps running while condition is true. Initial, condition, 
+
+for(let rep = 1; rep <= 10; rep++) {
+  //same as rep = rep + 1
+  console.log(`Lifting weights repetition ${rep} 🏋️‍♀️ `) //Emoji CMD + CTRL + SPACE
+};
+
+//For loop with an array
+const yousefArray = [
+    "Yousef", 
+    1, 
+    2023 - 1993, 
+    ['John', 'Jonah', 'Musk'],
+    true
+];
+
+//Do the same as below using a for loop
+console.log(yousefArray[0]);
+console.log(yousefArray[1]);
+console.log(yousefArray[2]);
+console.log(yousefArray[3]);
+console.log(yousefArray[4]);
+
+const types = [] //Values will be inserted from the loop below
+
+for(let i = 0; i < yousefArray.length; i++) {
+    console.log(yousefArray[i], typeof yousefArray[i]);
+    // types[i] = typeof yousefArray[i]; One way of inserting values into the 'types' array
+    types.push(typeof yousefArray[i]); //Alternative way of doing it
+};
+
+console.log(types);
+
+const years2 = [1990, 2045, 2035, 2042];
+const yearsDifference = []
+
+for(let i = 0; i < years2.length; i++) {
+    let calc = 2037 - years2[i];
+    yearsDifference.push(calc);
+};
+
+console.log(yearsDifference)
+
+//Continue and break statements
+console.log(`---ONLY STRINGS---`)
+for(let i = 0; i < yousefArray.length; i++) {
+    if (typeof yousefArray[i] !== 'string') continue; // Continue is  allows us to exit the current iteration of the loop and skips the types that are not string
+    console.log(yousefArray[i], typeof yousefArray[i]);
+};
+
+console.log(`---BREAK WITH NUMBERS---`)
+for(let i = 0; i < yousefArray.length; i++) {
+    if (typeof yousefArray[i] === 'number') break; //Break completely terminates the whole loop, not just the current iteration. So once a number is found, it terminates the loop. Once it finds a number it stops and prints the type before that and does not include the number.
+    console.log(yousefArray[i], typeof yousefArray[i]);
+};
+
+//Looping backwards
+
+for (let i = years2.length - 1; i >= 0; i --) {
+    console.log(years2[i]);
+};
+
+//Creating a loop inside a loop
+for (let exercise = 1; exercise < 4; exercise ++) {
+    console.log(`-----Starting exercise ${exercise}`);
+    for (let rep = 1; rep < 6; rep ++) {
+        console.log(`Exercise ${exercise}: Lifting weight repetition ${rep} 🏋️‍♀️`)
+    };
+};
+
+//While Loop in comparison a for loop
+for(let rep = 1; rep <= 10; rep++) {
+  //same as rep = rep + 1
+  console.log(`Lifting weights repetition ${rep} 🏋️‍♀️ `) //Emoji CMD + CTRL + SPACE
+};
+
+let rep = 1;
+//While loop does not need a counter, it is more versatile than a for loop. It just needs a condition.
+while (rep <= 10) {
+    console.log(`Lifting weights repetition ${rep} 🏋️‍♀️`);
+    rep++;
+};
+
+//Example 2:
+let dice = Math.trunc(Math.random() * 6) + 1; //random number between 0 and 6 but in decimal. Trunc makes it without decimal. The +1 is because it will give a number between 0 and 5.
+console.log(dice);
+
+while (dice !== 6) {
+    console.log(`You rolled a ${dice}`);
+    dice = Math.trunc(Math.random() * 6) + 1; //Back into the condition
+    if (dice === 6) console.log('Dice is a 6 so the loop ends');
+};
+
+
 
 /* This is a way to comment out code */
 
