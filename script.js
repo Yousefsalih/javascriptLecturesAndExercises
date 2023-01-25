@@ -638,14 +638,6 @@ const calcTempAmplitudeBug = function (t1, t2) {
 const amplitudeBug = calcTempAmplitudeBug([3, 5, 1], [9, 0, 5]); //2 arrays passed on as arguments to the parameters t1 and t2 in the calcTempAmplitudeBug variable with an anonymous function (function expression)
 console.log(amplitudeBug); //Show the value of the amplitude by returning it from the function calcTempAmplitude
 
-//Software bug: Defect or problem in a computer program (unexpected or unintended behaviour)
-
-//Debugging process:
-//Identify (during development, testing software, use reports during production, context)
-//Find: Developer console (Simple code), Debugger (complex code)
-//Fix: Replace wrong solution with new correct solution
-//Prevent: Search for the same bug in similar code, writing tests during testing software
-
 //How I solved the issue of concatenation
 
 // const measureKelvin = function (){
@@ -677,10 +669,3 @@ const measureKelvin = function () {
 
 console.log(measureKelvin()); //Call function
 
-
-/* This is a way to comment out code */
-
-/*Best Practices
-1) Always use const unless you're sure that the value will change in the future. This will reduce errors from mutating code.
-2) Avoid the loose equality (==) operator for clean code and use strict equality (===)
-*/
