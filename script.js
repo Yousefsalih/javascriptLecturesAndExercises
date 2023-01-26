@@ -669,3 +669,67 @@ const measureKelvin = function () {
 
 console.log(measureKelvin()); //Call function
 
+//Execution context exercise
+
+//Numbering is the order in which it gets executed
+const name = 'Jonas'; //#1 Top level code or Global context
+
+const first = () => {
+  // #2 Top level code or Global context
+  //Function body only executed when called.
+  let a = 1; // #5 first () execution context
+  const b = second(7, 9); // #6 first () execution context. Currently unknown because the second() function needs to run first. arguments = [7, 9] is part of the second() execution context. It is an array of passed arguments available in all regular functions except for arrow. 
+  a = a + b; //#9
+  return a; //#10
+};
+
+function second(x, y) { // #3 Top level code or Global context
+  const c = 2;// #7 second() execution context
+  return c; //#8
+};
+
+const z = first(); // #4 Top level code or global context. This is unknown in the global because it needs the first function to run first.
+
+//Values only become known during execution
+//When the second function returns, it will be removed from the call stack. Only the global context will remain until the browser is closed.
+//JavaScript has only one thread of execution
+
+//Scoping
+
+function calcAge6(birthYear) {
+  let output = `${firstName} YOU ARE BORN`
+  const age = 2037 - birthYear;
+  console.log(firstName); //JS did not find this variable in the scope. It did a variable look up to see if it exists in its parent, and indeed it exists in the global scope. Even though firstName is declared after the function calcAge6, due to the execution context, it comes first in the global execution context because it is declared before the function is called in line 706, therefore, it is part of the code global scope already.
+
+  if (birthYear >= 1981 && birthYear <= 1996) {
+    var millenial = true;
+    const firstName = 'Steven'
+    const str = `Oh, you're a millenial, ${firstName}`; //Due to JavaScript's scope chain, it will use Steven instead of Jonas since the variable exists within the same scope or closer scope in the variable look up.
+    console.log(str);
+
+    function add(a, b) {
+      return a + b;
+    }
+    add(2,3);//This will work
+    output = 'New output' //This will update line 700 since the variable is 'let'
+  }
+  console.log(output); //This will log the new updated output in line 714. However if 714 was a const variable, then output would have two variables, both line 700 and 714.
+  add(2, 3); //This will not work because it is outside of the scope of the if block statement. This is only applicable in strict mode. If it is not in strict mode, it will work.
+  console.log(str) //This will not work because const is block-scoped
+  console.log(millenial) //This will work because var is function scoped
+  function printAge() {
+    const output = `You are ${age}, born in ${birthYear}`;
+    console.log(output)
+  }
+  printAge();
+
+  return age;
+};
+
+const firstName = 'Jonas'
+calcAge6(1991);
+console.log(age); //Will not work because age is within the scope of calcAge6
+printAge(); //Will not work because it is accessible only within calcAge6
+
+
+
