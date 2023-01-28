@@ -966,3 +966,88 @@ jessicaCopy.family.push('John');
 
 console.log('Before Marriage: ', jessica2); //Both objects will have the family object values because it is one level deeper than the first level due to Object.assign. A deep clone will be necessary by using an external library like Lo-Dash
 console.log('After Marriage: ', jessicaCopy);
+
+//Array Destructuring
+//A way of unpacking values from an array or an object into seperate variables. Break a complex data structure down into smaller data structure like a variable. 
+
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  order: function(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
+  },
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, // Open 24 hours
+      close: 24,
+    },
+  },
+};
+
+//Before destructuring
+const arr = [2,3,4];
+const a = arr[0];
+const b = arr[1];
+const c = arr[2];
+
+//After destructuring
+const [x, y, z] = arr; //[x, y, z] is not an array. It is just a destructuring assignment. You must declare the variables using const.
+console.log(x, y, z);
+console.log(arr); //Not affected by destructuring
+
+const [first, second] = restaurant.categories;
+const [zero, , two] = restaurant.categories;
+console.log(first, second); //Italian Pizzeria
+console.log(zero, two); //Italian Vegetarian because there is a gap in [1]
+
+
+//Switch variables before destructuring
+let [main, , secondary] = restaurant.categories;
+console.log(main, secondary);
+
+//Before destructuring
+const temp = main;
+main = secondary;
+secondary = temp;
+console.log(main, secondary);
+
+// After destructuring
+[main, secondary] = [secondary, main]
+console.log(main, secondary);
+
+console.log(restaurant.order(2, 0)); //Array ['Garlic Bread', 'Pizza']
+const [starter, mainCourse] = restaurant.order(2, 0); //Destructure
+console.log(starter, mainCourse); //Garlic Bread Pizza - as a string not in an array
+
+//Nested Destructuring (Array within an array)
+const nested = [2, 4, [5, 6]];
+
+// const [i, , j] = nested;
+// console.log(i, j); //2, Array [5, 6]
+
+const [i, , [j, k]] = nested;
+console.log(i, j, k); //2, 5, 6
+
+
+//Default values (dont know the length of the array)
+// const [p, q, r] = [8, 9] //We don't know how long the array [8,9] is
+// console.log(p, q, r); //8, 9, undefined    ....Undefined because the value doesn't exist in the array above.
+
+
+// const [p = 1, q = 1, r = 1] = [8, 9] //Setting 1 as the default value
+// console.log(p, q, r); //8, 9, 1. It will turn to one as shown because r has a default of 1 if the array doesn't have it.
+
+const [p = 1, q = 1, r = 1] = [8] //If 9 is removed from the array
+console.log(p, q, r); //8, 1, 1 The rest will be updated to their default values
+
