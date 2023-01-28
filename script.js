@@ -731,5 +731,155 @@ calcAge6(1991);
 console.log(age); //Will not work because age is within the scope of calcAge6
 printAge(); //Will not work because it is accessible only within calcAge6
 
+//Hoisting
+
+//Variable hoisting
+const myName = 'Yousef';
+
+if (myName === 'Yousef') {
+  console.log(varHoisting); //Undefined value
+  console.log(letHoisting); // ReferenceError: Cannot access 'letHoisting' before initialization.
+  console.log(`Yousef is a ${job1}`); //Temporal Dead Zone for job variable. ReferenceError: Cannot access 'job' before initialization.
+  let letHoisting = 'I will be a reference error';
+  var varHoisting = 'I will be undefined';
+  const age = 2037 - 1999; //TDZ for job variable
+  console.log(age); //TDZ for job variable
+  const job = 'teacher'; //Declared
+  console.log(x); //ReferenceError: x is not defined. No longer TDZ for job variable and can be accessed.
+}
+
+//Function hoisting
+
+console.log(addDecl(2, 3)); //It will work because it is a function declaration
+console.log(addExpr(2, 3)); //ReferenceError: Cannot access 'addExpr' before initialization.
+console.log(addArrow(2, 3)); //ReferenceError: Cannot access 'addArrow' before initialization.
+
+function addDecl(a, b) {
+  return a + b;
+};
+
+const addExpr = function (a, b) { 
+  return a + b;
+};
+
+const addArrow = (a, b) => a + b;
+
+//Example
+
+if(!numProducts) deleteShoppingCart(); //If there is no products, delete the shopping cart. It will deleted the products because numProducts is not 10, it is currently undefined which will execute the function deleteShoppingCart. 
+var numProducts = 10;
+function deleteShoppingCart() {
+  console.log('All products deleted');
+};
+
+//This keyword
+
+//Method
+
+const joseph = {
+  name: 'Joseph',
+  year: 1999,
+  calcAge: function () { //calcAge is a method
+    return 2037 - this.year; //this is referring to the object 'joseph' that is accessing the year property with the value 1999
+  }
+};
+
+joseph.calcAge();//Object calling the method
+
+//
+
+console.log(this); //Global scope is the window object/global object
+
+//Function expression
+const calcAgeThis = function(birthYear) {
+  console.log(20377- birthYear)
+  console.log(this); //undefined in strict mode otherwise window object
+}
+
+//Arrow function
+const calcAgeThisArrow = birthYear => {
+  console.log(20377 - birthYear);
+  console.log(this); //Shows the window object using the lexical this keyword because it refers to the nearest parent scope
+};
+
+calcAgeThisArrow(1993);
+
+const jones = {
+  year: 1993,
+  calcAge: function () {
+    console.log(this); //jones object
+    console.log(2046 - this.year)//Instead of inserting an argument in line 815 we can use access the value from the object immediately and use it for the calculation
+  },
+};
+
+jones.calcAge(); //Just to call the method
+
+const matilda = {
+  year: 2017,
+};
+
+matilda.calcAge = jones.calcAge //This is called method borrowing
+
+matilda.calcAge(); //Calling the method that is now inserted in matilda object will produce a console log of the object which is now matilda and the calculation which will be 2046 - 2017 = 29.
+
+const yousefObject2 = {
+  firstName: 'Yousef',
+  lastName: 'Salih',
+  job: 'Front-End Developer',
+  friends: ['Sam', 'Bill', 'Jack'],
+  hasDriversLicense: true,
+  birthYear: 1990,
+  calcAge: function () {
+    console.log(this);
+    console.log(2037 - this.birthYear);
+    //Solution 1 to the undefined this keyword below
+  //   const self = this; //self or that is common to use
+  //   const isMillenial = function() {
+  //     console.log(self.year >= 1981 && self.year <= 1996);//this keyword is undefined
+  //   };
+
+  //   isMillenial(); //Regular function call inside a method so the this keyword would be undefined.
+  // },
+
+    //Solution 2 to the undefined this keyword below using an arrow function since it doesn't have its own this keyword so it inherits it from its parent which is the calcAge method. The calcAge method this keyword refers to the object yousefObject2.
+        const isMillenial = () => {
+      console.log(this.year >= 1981 && this.year <= 1996);//
+    };
+
+    isMillenial();
+  },
+
+    //this keyword undefined
+  //   const isMillenial = function() {
+  //     console.log(this.year >= 1981 && this.year <= 1996);//this keyword is undefined
+  //   };
+
+  //   isMillenial(); //Regular function call inside a method so the this keyword would be undefined.
+  // },
+
+  greet: () => console.log(`Hey ${this.firstName}`), //Object literal is not treated like a block scope and for that reason the 'this' keyword will not take it from this object but rather from the global scope for an arrow function because an arrow function doesn't receive its own this keyword. Never use an arrow function as a method as a best practice.
+};
+
+yousefObject2.greet(); //firstName is undefined
+yousefObject2.calcAge();
+
+//Arguments keyword is only available in regular functions
+const addExpr1 = function (a, b) {
+  console.log(arguments); //Arguments is an array of the values assigned below (2 and 5). We can have more arguments even if there are less parameters available. In this case only 2 (a and b) for line 873.
+  return a + b;
+};
+
+addExpr1(2, 5);
+addExpr1(2, 5, 8, 12)
+
+var addArrow1 = (a, b) => {
+  console.log(arguments);
+  return a + b
+};
+
+addArrow1(23, 23)//This will not work because arrow functions don't have access to the arguments keyword
+
+//Regular functions: Declaration and expression
+
 
 
