@@ -971,7 +971,7 @@ console.log('After Marriage: ', jessicaCopy);
 //A way of unpacking values from an array or an object into seperate variables. Break a complex data structure down into smaller data structure like a variable. 
 
 const restaurant = {
-  name: 'Classico Italiano',
+  restaurantName: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
@@ -979,6 +979,11 @@ const restaurant = {
   order: function(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
   },
+
+  orderDelivery: function ({starterIndex, mainIndex, time = '20:00', address}) { //Destructuring and must match the property names in the property object orderDelivery or inputting it directly in the parameters
+    console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
+  },
+ 
   openingHours: {
     thu: {
       open: 12,
@@ -994,6 +999,13 @@ const restaurant = {
     },
   },
 };
+
+restaurant.orderDelivery({
+  // time: '22:30',
+  address: 'Via del Sole, 21',
+  mainIndex: 2,
+  starterIndex: 2,
+});
 
 //Before destructuring
 const arr = [2,3,4];
@@ -1050,4 +1062,38 @@ console.log(i, j, k); //2, 5, 6
 
 const [p = 1, q = 1, r = 1] = [8] //If 9 is removed from the array
 console.log(p, q, r); //8, 1, 1 The rest will be updated to their default values
+
+//Destructuring Objects: Useful for third party data
+
+const { restaurantName, openingHours, categories } = restaurant; //The order in object destructuring does not matter. Destructuring the right side of the assignment operator, therefore, the object restaurant.
+
+console.log(restaurantName, openingHours, categories);
+
+const {restaurantName : restaurantCompany, openingHours: hours, categories: tags} = restaurant; //Changing the property names
+console.log(restaurantCompany, hours, tags); //Same as line 1058
+
+//Setting default value
+const {menu = [], starterMenu: starters = []} = restaurant;
+console.log(menu, starters); //menu default value will be an empty array.
+
+
+//Mutating variables
+let d = 111;
+let h = 999;
+const obj = { d: 23, h:7, c:14 };
+({d, h} = obj);
+console.log(d, h);
+
+//Nested objects
+const {fri} = openingHours;
+console.log(fri); //Object {open: 11, close: 23}
+
+const {fri: {open, close}} = openingHours;//Further destructure by accessing the open and close values
+console.log(open, close); //11 23
+
+const {fri: {open: o, close: cl}} = openingHours;//Further destructure by simplifying the variable/property names
+console.log(o, cl); //11 23
+
+
+
 
