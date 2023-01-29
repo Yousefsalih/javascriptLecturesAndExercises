@@ -1215,9 +1215,10 @@ console.log(true || 0); //true because it is truthy
 console.log(undefined || null); //undefined and null are both falsy but no short circuiting so it takes the second value
 console.log(undefined || 0 || '' || 'Hello' || 23 || null ); //Hello because it is the first truthy value (short-circuit)
 
-// restaurant.numGuests = 23; //This will make line 1220 and 1223 to 23
-const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
-console.log(guests1); //10 because numGuests doesn't exist so it sets it to 10
+// restaurant.numGuests = 0;
+// // restaurant.numGuests = 23; //This will make line 1220 and 1223 to 23
+// const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+// console.log(guests1); //10 because numGuests doesn't exist so it sets it to 10. Because 0 is a falsy value.
 
 const guests2 = restaurant.numGuests || 10;
 console.log(guests2); //10 // since restaurant.numGuests is undefined it is falsy so it will take the second value which is 10. Alternatively 23 if line 1218 is active because it is the first truthy value even though both 23 and 10 are truthy. 
@@ -1238,5 +1239,13 @@ restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach') //The fir
 //On the other hand, the & operator will return the first falsy value or the last value if all of them are truthy
 
 
+//Nullish Coalescing Operator (??)
+
+// restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+console.log(guests); //10 because 0 is falsy
 
 
+//Nullish values: null and undefined (NOT 0 or ''= truthy values within nullish coalescing operator)
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect); //0 because it is truthy within this context. Therefore, it will take the first truthy value. Null and undefined are not taken as per line 1246 if 1244 is commented out.
