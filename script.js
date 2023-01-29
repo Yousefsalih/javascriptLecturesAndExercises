@@ -987,6 +987,11 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, and ${ing3}`);
   },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient); //Mushrooms
+    console.log(otherIngredients); //['Onion', 'Olives', 'Spinach']
+  },
  
   openingHours: {
     thu: {
@@ -1157,3 +1162,44 @@ const restaurantCopy = {...restaurant};
 restaurantCopy.restaurantName = 'Riestorante Rome';
 console.log(restaurantCopy.restaurantName); //Riestorance Rome
 console.log(restaurant.restaurantName); //Classico Italiano
+
+//Rest Pattern and Rest parameters
+//Rest pattern does the opposite of the spread operator (Build new arrays/pass multiple values into a function/spread the array into individual elements.). Rest pattern uses the same syntax and rather than unpacking multiple elements, it packs multiple elements together.
+
+//Below is Destructuring (line 1164-1178)
+//Spread because on RIGHT side of = (assignment operator)
+const arraySpread = [1, 2, ...[3, 4]]; //[1, 2, 3, 4]
+console.log(arraySpread);
+
+//REST because on LEFT side of = (assignment operator)
+const [g, f, ...others] = [1, 2, 3, 4, 5];
+console.log(g, f, others); //1 2 [3, 4, 5]
+
+const [pizza, , Risotto, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(pizza, Risotto, otherFood);// Pizza Ristotto ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad']
+
+//Objects
+const { sat, ...weekdays } = restaurant.openingHours; //Restaurant.openingHours (destructuring). The rest takes out sat and creates a new object called weekdays for the remaining properites and values
+console.log(weekdays); //Object {thu, fri} is the new weekdays object
+
+//Functions
+const add = function (...numbers) { //REST = Multiple values and packs it into one array. These are called rest arguments
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++ ){
+    sum += numbers[i];
+    console.log(sum); //2, 5 (Because it adds 0+2 then in the next iteration 2+3 =5)
+  };
+  console.log(numbers); //[2,3] //conversion from seperate values into one array
+};
+
+add(2,3) //[2, 3] = 5
+add(5,3,7,2) //[5,3,7,2] = 17
+add(8,2,5,3,2,1,4) //[8,2,5,3,2,1,4] = 25
+
+const t = [23,5,7];
+add(...t); //spread operator. Same as writing manually 23, 5, 7 into the function add as arguments
+
+restaurant.orderPizza('Mushrooms', 'Onion', 'Olives', 'Spinach');
+restaurant.orderPizza('mushrooms'); //Since the remaining is not available, it becomes an empty array and only mushrooms will show up
+
+//Spread operator is used where we would otherwise write values, seperated by a commas. The rest pattern is basically used where we would otherwise write variables names seperated by commas and not values seperated by commas.
