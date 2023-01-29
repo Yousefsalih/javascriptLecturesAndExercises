@@ -1203,3 +1203,40 @@ restaurant.orderPizza('Mushrooms', 'Onion', 'Olives', 'Spinach');
 restaurant.orderPizza('mushrooms'); //Since the remaining is not available, it becomes an empty array and only mushrooms will show up
 
 //Spread operator is used where we would otherwise write values, seperated by a commas. The rest pattern is basically used where we would otherwise write variables names seperated by commas and not values seperated by commas.
+
+//Short Circuiting (&& and ||)
+
+console.log('--- OR ----');
+//Use ANY data type, return ANY data type, short-circuiting evaluation
+console.log(3 || 'Jonas'); //If the first operaant is truthy, it will take the first one =short circuting
+
+console.log('' || 'Jonas'); //Jonas because it is truthy
+console.log(true || 0); //true because it is truthy
+console.log(undefined || null); //undefined and null are both falsy but no short circuiting so it takes the second value
+console.log(undefined || 0 || '' || 'Hello' || 23 || null ); //Hello because it is the first truthy value (short-circuit)
+
+// restaurant.numGuests = 23; //This will make line 1220 and 1223 to 23
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1); //10 because numGuests doesn't exist so it sets it to 10
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2); //10 // since restaurant.numGuests is undefined it is falsy so it will take the second value which is 10. Alternatively 23 if line 1218 is active because it is the first truthy value even though both 23 and 10 are truthy. 
+
+console.log('--- AND ----');
+console.log(0 && 'Jonas'); //shows 0, which is the opposite of the OR operator. It returns the first falsy value which in this case is 0.
+console.log(7 && 'Jonas'); //shows 'Jonas', which is the opposite of the OR operator, since the first is truthy and the second is truthy as well.
+
+console.log('Hello' && 23 && null && 'jonas');//Null since it is the first falsy value and the whole evaluation is false so it shortcircuits
+
+if (restaurant.orderPizza) { //If it exists
+  restaurant.orderPizza('mushrooms', 'spinach'); //then execute
+}
+
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach') //The first part restaurant.orderPizza is the same as line 1231. This will be truthy so it will continue and execute by calling the function orderPizza and passing the arguments.
+
+//OR operator will return the first truthy value of all the operants or the last operant if all the values are falsy
+//On the other hand, the & operator will return the first falsy value or the last value if all of them are truthy
+
+
+
+
