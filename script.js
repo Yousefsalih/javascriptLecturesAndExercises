@@ -983,6 +983,10 @@ const restaurant = {
   orderDelivery: function ({starterIndex, mainIndex, time = '20:00', address}) { //Destructuring and must match the property names in the property object orderDelivery or inputting it directly in the parameters
     console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
   },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, and ${ing3}`);
+  },
  
   openingHours: {
     thu: {
@@ -1091,9 +1095,65 @@ console.log(fri); //Object {open: 11, close: 23}
 const {fri: {open, close}} = openingHours;//Further destructure by accessing the open and close values
 console.log(open, close); //11 23
 
-const {fri: {open: o, close: cl}} = openingHours;//Further destructure by simplifying the variable/property names
-console.log(o, cl); //11 23
+const {fri: {open: o, close: clo}} = openingHours;//Further destructure by simplifying the variable/property names
+console.log(o, clo); //11 23
 
+//Spread Operator - creating a new array or passing values into a function
 
+const array = [7, 8, 9];
+const badNewArray = [1, 2, array[0], array[1], array[2]];
+console.log(badNewArray); // [1, 2, 7, 8, 9]
 
+const newArray = [1, 2, ... array]; //You dont need to write out the above by using ...
+console.log(newArray); //[1, 2, 7, 8, 9] 
 
+console.log(...newArray); //Individually 1 2 7 8 9
+const newMenu = [...restaurant.mainMenu, 'Gnocci']; //Adds Gnocci to the menu but not changing the original array. It creates a new array under newMenu
+console.log(newMenu); //["Pizza", "Pasta", "Risotto", "Gnocci"]
+
+//Copy array
+const mainMenuCopy = [...restaurant.mainMenu]; //Shallow copy of the main menu (Similar Object assign)
+console.log(mainMenuCopy);
+
+//Join 2 arrays
+const awesomeMenu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(awesomeMenu);
+
+//Spread operators works on all kinds of iterables, not just arrays. An iterable is things like arrays, strings, maps, or sets but NOT OBJECTS.
+
+const string = 'Jonas'
+
+const letters = [...string];
+console.log(letters); //Creates an array ["J", "O", "N", "A", "S"]
+console.log(...string);//J o n a s - creates the individual elements
+
+//Multiple values seperated by a comma are usually only expected when we pass arguments into a function or when we build a new array.
+
+// //Template literals do not expect multiple values separated by a comma
+// console.log(`${...str} Salih`); //will not work
+
+const ingredients = [
+  // prompt(`Lets make pasta! Ingredient 1?`),
+  // prompt(`Ingredient 2?`),
+  // prompt(`Ingredient 3?`),
+];
+
+console.log(ingredients);
+
+// //Previous way of putting in the values we get from the array ingredients into orderPasta property method
+// restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2])
+
+//Better way to do the above
+restaurant.orderPasta(...ingredients); //Here is your delicious pasta with X, Y, Z
+
+//Objects: Not iterables
+//Below is a shallow copy
+const newRestaurant = {...restaurant, founder: 'Guiseppe', foundedIn: 1998}
+console.log(newRestaurant);
+
+//Instead of object.assign()
+
+const restaurantCopy = {...restaurant};
+restaurantCopy.restaurantName = 'Riestorante Rome';
+console.log(restaurantCopy.restaurantName); //Riestorance Rome
+console.log(restaurant.restaurantName); //Classico Italiano
