@@ -1249,3 +1249,39 @@ console.log(guests); //10 because 0 is falsy
 //Nullish values: null and undefined (NOT 0 or ''= truthy values within nullish coalescing operator)
 const guestCorrect = restaurant.numGuests ?? 10;
 console.log(guestCorrect); //0 because it is truthy within this context. Therefore, it will take the first truthy value. Null and undefined are not taken as per line 1246 if 1244 is commented out.
+
+//Logical Assignment operators
+
+const rest1 = {
+  name: 'Capri',
+  // numGuests: 20, //Before nullish
+  numGuests: 0, //To demonstrate nullish coalescing operator. Line 1278 will show 10 because 0 is falsy.
+}
+
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni Rossi',
+};
+
+//Short Circuiting example
+// rest1.numGuests = rest1.numGuests || 10; //If first value is truthy (20), it will take it otherwise it will be 10.
+// rest1.numGuests ||=10; //Same as above (OR assignment operator)
+// rest2.numGuests = rest2.numGuests || 10; //Since there is no value or undefined, making it falsy, it will resort to the default of 10
+
+// rest2.numGuests ||= 10; //Same as above
+
+//Nullish assignment operator()
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+// rest1.owner = rest1.owner && '<ANONYMOUS>' //It will take the first value because it is falsy or undefined because there is no value in rest 1
+rest1.owner &&= '<ANONYMOUS>'; //Same as above
+// rest2.owner = rest2.owner && '<ANONYMOUS>' //It will take anonymous because the first one is truthy (There is Giovanni Rossi), therefore it will take the next falsy value
+rest2.owner &&= '<ANONYMOUS>'; //Same as above
+
+
+console.log(rest1.numGuests); //before nullish 20....with nullish it will be 0, because 0 is truthy with nullish
+console.log(rest2.numGuests); //before nullish 10....with nullish it will be 10 because numGuests is undefined so it is falsy therefore choosing 10
+
+console.log(rest1);
+console.log(rest2);
