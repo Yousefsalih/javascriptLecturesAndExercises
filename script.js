@@ -1333,3 +1333,63 @@ for (const [i, el] of menu.entries()) {
   // 7: Risotto
 };
 
+//Enhanced Object Literals
+
+const weekdays1 = ['mon', 'tue', 'wed'] //Feature #3: Computing within an object
+
+
+//Feature #1: Add an object as a property to an existing object
+
+const openingHours1 = {
+    [weekdays1[0]]: { //Mon
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    [`day- ${2+4}`]: { //day - 6
+      open: 0, // Open 24 hours
+      close: 24,
+    },
+  };
+
+console.log(openingHours1);
+
+const restaurant1 = {
+  restaurantName: 'Classico Enhanced',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+
+  orderDelivery: function ({
+    starterIndex,
+    mainIndex,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
+
+  orderPasta (ing1, ing2, ing3){ //Feature #2: Removing the function syntax (both semicolon and function keyword) for methods
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2}, and ${ing3}`
+    );
+  },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
+  openingHours1, //Adding the object openingHours1 from line 1340
+};
+
+console.log(restaurant1); //Includes openingHours1
+
