@@ -1335,25 +1335,26 @@ for (const [i, el] of menu.entries()) {
 
 //Enhanced Object Literals
 
-const weekdays1 = ['mon', 'tue', 'wed'] //Feature #3: Computing within an object
+const weekdays1 = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'] //Feature #3: Computing within an object
 
 
 //Feature #1: Add an object as a property to an existing object
 
 const openingHours1 = {
-    [weekdays1[0]]: { //Mon
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    [`day- ${2+4}`]: { //day - 6
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  };
+  [weekdays1[3]]: { //Thu
+    open: 12,
+    close: 22,
+  },
+  [weekdays1[4]]: { //Fri
+    open: 11,
+    close: 23,
+  },
+  [weekdays1[5]]: { //Sat
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+  // [`day- ${2 + 4}`] Example of Computation
+};
 
 console.log(openingHours1);
 
@@ -1392,4 +1393,44 @@ const restaurant1 = {
 };
 
 console.log(restaurant1); //Includes openingHours1
+
+//Optional Chaining (ES2020)
+
+//Before optional chaining
+if (restaurant1.openingHours1 && restaurant1.openingHours1.mon) console.log(restaurant1.openingHours1.mon.open); // Error Undefined because thu does not exist.
+
+if (restaurant1.openingHours1.fri) console.log(restaurant1.openingHours1.fri.open); //11
+
+
+
+//With Optional chaining
+
+console.log(restaurant1.openingHours1.mon?.open); //Only if property of mon is available (NOT undefined or null) then access open otherwise make it undefined. If its 0 or a '' then a property exists.
+
+console.log(restaurant1.openingHours1?.mon?.open);//Only if property of openingHours1 is available then access mon otherwise make it undefined. In this case it will be undefined.
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+for(const day of days) {
+  // const open = restaurant1.openingHours1[day]?.open; //We need use bracket notation if we need use a variable name that is not a property name of the object. Ex: On sat, we open at undefined
+  // const open = restaurant1.openingHours1[day]?.open || 'closed'; // To remove the undefined value, we can use the OR operator and make it closed. However, it shows that on sat it is closed because zero is a falsy value.
+  const open = restaurant1.openingHours1[day]?.open ?? 'closed'; // To fix 1416, we use the null coalescing operator
+
+  console.log(`On ${day}, we open at ${open}`);
+};
+
+//Optional chaining on method
+
+console.log(restaurant1.order?.(0,1) ?? 'Method does not exist'); //It exists
+console.log(restaurant1.orderRisotto?.(0, 1) ?? 'Method does not exist'); //Method does not exist
+
+//Optional chaining on arrays
+const users = [{ name: 'Jonas', emai: 'hello@jonas.io'}];
+
+console.log(users[0]?.name ?? 'User array empty'); //Jonas
+console.log(users[4]?.name ?? 'User array empty'); //User array empty
+
+if(users.length > 0) console.log(users[0].name); else console.log('User empty array'); //Same as 1429-1430
+
+
+
 
