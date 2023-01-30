@@ -1431,6 +1431,35 @@ console.log(users[4]?.name ?? 'User array empty'); //User array empty
 
 if(users.length > 0) console.log(users[0].name); else console.log('User empty array'); //Same as 1429-1430
 
+//Looping Objects (Indirectly since it is not an iterable)
 
+//Looping over keys/properties
 
+const properites = Object.keys(openingHours1);
+console.log(properites);
+
+let openStr = `We are open on ${properites.length} days:`
+for (const day of properites) {
+  openStr += `${day},`
+}
+
+console.log(openStr);
+
+//Property Values
+const values = Object.values(openingHours1)
+console.log(values);
+
+const entries = Object.entries(openingHours1);
+console.log(entries);//Returns an array of 3 arrays (Thu,fri,sat)
+
+// for (const [key, value] of entries) {
+//   //value was destructured into {open, close}. key changed to day.
+//   // console.log(`On ${key} we open at ${open} and close at ${close}`); //On thu we open at 12 and close at 22
+//   console.log(`On ${key} we open at ${open} and close at ${close}`); //Same as above
+// }
+
+for (const [day, {open, close}] of entries) { //value was destructured into {open, close}. key changed to day (you can use anything besides key or day).
+  // console.log(`On ${key} we open at ${open} and close at ${close}`); //On thu we open at 12 and close at 22
+  console.log(`On ${day} we open at ${open} and close at ${close}`);//Same as above
+}
 
