@@ -1,3 +1,4 @@
+'use strict';
 // /*JavaScript Fundamentals – Part 1
 // LECTURE: Values and Variables
 // 1. Declare variables called 'country','continent'and' population' and assign their values according to your own country (population in millions)
@@ -678,7 +679,7 @@
 //   // #2 Top level code or Global context
 //   //Function body only executed when called.
 //   let a = 1; // #5 first () execution context
-//   const b = second(7, 9); // #6 first () execution context. Currently unknown because the second() function needs to run first. arguments = [7, 9] is part of the second() execution context. It is an array of passed arguments available in all regular functions except for arrow. 
+//   const b = second(7, 9); // #6 first () execution context. Currently unknown because the second() function needs to run first. arguments = [7, 9] is part of the second() execution context. It is an array of passed arguments available in all regular functions except for arrow.
 //   a = a + b; //#9
 //   return a; //#10
 // };
@@ -758,7 +759,7 @@
 //   return a + b;
 // };
 
-// const addExpr = function (a, b) { 
+// const addExpr = function (a, b) {
 //   return a + b;
 // };
 
@@ -766,7 +767,7 @@
 
 // //Example
 
-// if(!numProducts) deleteShoppingCart(); //If there is no products, delete the shopping cart. It will deleted the products because numProducts is not 10, it is currently undefined which will execute the function deleteShoppingCart. 
+// if(!numProducts) deleteShoppingCart(); //If there is no products, delete the shopping cart. It will deleted the products because numProducts is not 10, it is currently undefined which will execute the function deleteShoppingCart.
 // var numProducts = 10;
 // function deleteShoppingCart() {
 //   console.log('All products deleted');
@@ -881,7 +882,6 @@
 
 // //Regular functions: Declaration and expression
 
-
 //Primitives Vs. Objects (Primitive Vs. Reference Types)
 
 let age = 30;
@@ -889,7 +889,7 @@ let oldAge = age;
 age = 31;
 
 console.log(age); //31
-console.log(oldAge);//30 - declared before the update on line 889
+console.log(oldAge); //30 - declared before the update on line 889
 
 const me = {
   name: 'Yousef',
@@ -912,7 +912,7 @@ console.log('Me', me);
 
 //Process for the example above (887-892) for primitive values:
 //#1 JavaScript will create a Unique identifier with the variable name age in the call stack because it is a primitive value
-//#2 Then a piece of memory will be allocated with a certain address like 0001. 
+//#2 Then a piece of memory will be allocated with a certain address like 0001.
 //#3 The value '30' will be stored in the memory address 0001.
 //#4 Identifier points to the address and not the value itself. So age is equal to 0001 with the value of 30.
 //#5 oldAge will point to the same memory address 0001. Making the value 30.
@@ -926,11 +926,10 @@ console.log('Me', me);
 //#5 Now changing a property in the friend object, which is under address D30F (line 900). NOTE: All variables declared with const are immuatable is only applicable to primitive values and NOT reference values (ex. objects)
 //#6 the me object age is also 27 are both pointing to the same object in the memory heap. Both identifiers me and friend are pointing to 0003 with value D30F which points to the address D30F in the heap with the updated value.
 
-
 let lastName = 'Williams';
 let oldLastName = lastName;
-lastName = 'Davis'
-console.log(lastName, oldLastName) //Davis Williams. Each primitive value is stored in its own memory in the stack.
+lastName = 'Davis';
+console.log(lastName, oldLastName); //Davis Williams. Each primitive value is stored in its own memory in the stack.
 
 const jessica = {
   firstName: 'Jessica',
@@ -938,7 +937,7 @@ const jessica = {
   age: 27,
 };
 
-const marriedJessica = jessica;//Behind the scenes, we're just copying the reference to the object jessica
+const marriedJessica = jessica; //Behind the scenes, we're just copying the reference to the object jessica
 marriedJessica.lastName = 'Davis';
 
 console.log('Before marriage:', jessica); //Both will have Davis as last name. It happened because when we copied the object, it didn't create a new object in the heap for marriedJessica. Its another variable in the stack that holds the reference to the original object (same memory address in the heap). In the stack, they both hold the same memory address reference. Two different identifiers but the same address in the stack, same value in the stack which points to the same object in the heap.
@@ -968,7 +967,7 @@ console.log('Before Marriage: ', jessica2); //Both objects will have the family 
 console.log('After Marriage: ', jessicaCopy);
 
 //Array Destructuring
-//A way of unpacking values from an array or an object into seperate variables. Break a complex data structure down into smaller data structure like a variable. 
+//A way of unpacking values from an array or an object into seperate variables. Break a complex data structure down into smaller data structure like a variable.
 
 const restaurant = {
   restaurantName: 'Classico Italiano',
@@ -976,23 +975,33 @@ const restaurant = {
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-  order: function(starterIndex, mainIndex) {
-    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
-  orderDelivery: function ({starterIndex, mainIndex, time = '20:00', address}) { //Destructuring and must match the property names in the property object orderDelivery or inputting it directly in the parameters
-    console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
+  orderDelivery: function ({
+    starterIndex,
+    mainIndex,
+    time = '20:00',
+    address,
+  }) {
+    //Destructuring and must match the property names in the property object orderDelivery or inputting it directly in the parameters
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
   },
 
   orderPasta: function (ing1, ing2, ing3) {
-    console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, and ${ing3}`);
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2}, and ${ing3}`
+    );
   },
 
   orderPizza: function (mainIngredient, ...otherIngredients) {
     console.log(mainIngredient); //Mushrooms
     console.log(otherIngredients); //['Onion', 'Olives', 'Spinach']
   },
- 
+
   openingHours: {
     thu: {
       open: 12,
@@ -1017,7 +1026,7 @@ restaurant.orderDelivery({
 });
 
 //Before destructuring
-const arr = [2,3,4];
+const arr = [2, 3, 4];
 const a = arr[0];
 const b = arr[1];
 const c = arr[2];
@@ -1032,7 +1041,6 @@ const [zero, , two] = restaurant.categories;
 console.log(first, second); //Italian Pizzeria
 console.log(zero, two); //Italian Vegetarian because there is a gap in [1]
 
-
 //Switch variables before destructuring
 let [main, , secondary] = restaurant.categories;
 console.log(main, secondary);
@@ -1044,7 +1052,7 @@ secondary = temp;
 console.log(main, secondary);
 
 // After destructuring
-[main, secondary] = [secondary, main]
+[main, secondary] = [secondary, main];
 console.log(main, secondary);
 
 console.log(restaurant.order(2, 0)); //Array ['Garlic Bread', 'Pizza']
@@ -1060,16 +1068,14 @@ const nested = [2, 4, [5, 6]];
 const [i, , [j, k]] = nested;
 console.log(i, j, k); //2, 5, 6
 
-
 //Default values (dont know the length of the array)
 // const [p, q, r] = [8, 9] //We don't know how long the array [8,9] is
 // console.log(p, q, r); //8, 9, undefined    ....Undefined because the value doesn't exist in the array above.
 
-
 // const [p = 1, q = 1, r = 1] = [8, 9] //Setting 1 as the default value
 // console.log(p, q, r); //8, 9, 1. It will turn to one as shown because r has a default of 1 if the array doesn't have it.
 
-const [p = 1, q = 1, r = 1] = [8] //If 9 is removed from the array
+const [p = 1, q = 1, r = 1] = [8]; //If 9 is removed from the array
 console.log(p, q, r); //8, 1, 1 The rest will be updated to their default values
 
 //Destructuring Objects: Useful for third party data
@@ -1078,29 +1084,36 @@ const { restaurantName, openingHours, categories } = restaurant; //The order in 
 
 console.log(restaurantName, openingHours, categories);
 
-const {restaurantName : restaurantCompany, openingHours: hours, categories: tags} = restaurant; //Changing the property names
+const {
+  restaurantName: restaurantCompany,
+  openingHours: hours,
+  categories: tags,
+} = restaurant; //Changing the property names
 console.log(restaurantCompany, hours, tags); //Same as line 1058
 
 //Setting default value
-const {menu = [], starterMenu: starters = []} = restaurant;
-console.log(menu, starters); //menu default value will be an empty array.
-
+// const { menu = [], starterMenu: starters = [] } = restaurant;
+// console.log(menu, starters); //menu default value will be an empty array.
 
 //Mutating variables
 let d = 111;
 let h = 999;
-const obj = { d: 23, h:7, c:14 };
-({d, h} = obj);
+const obj = { d: 23, h: 7, c: 14 };
+({ d, h } = obj);
 console.log(d, h);
 
 //Nested objects
-const {fri} = openingHours;
+const { fri } = openingHours;
 console.log(fri); //Object {open: 11, close: 23}
 
-const {fri: {open, close}} = openingHours;//Further destructure by accessing the open and close values
+const {
+  fri: { open, close },
+} = openingHours; //Further destructure by accessing the open and close values
 console.log(open, close); //11 23
 
-const {fri: {open: o, close: clo}} = openingHours;//Further destructure by simplifying the variable/property names
+const {
+  fri: { open: o, close: clo },
+} = openingHours; //Further destructure by simplifying the variable/property names
 console.log(o, clo); //11 23
 
 //Spread Operator - creating a new array or passing values into a function
@@ -1109,8 +1122,8 @@ const array = [7, 8, 9];
 const badNewArray = [1, 2, array[0], array[1], array[2]];
 console.log(badNewArray); // [1, 2, 7, 8, 9]
 
-const newArray = [1, 2, ... array]; //You dont need to write out the above by using ...
-console.log(newArray); //[1, 2, 7, 8, 9] 
+const newArray = [1, 2, ...array]; //You dont need to write out the above by using ...
+console.log(newArray); //[1, 2, 7, 8, 9]
 
 console.log(...newArray); //Individually 1 2 7 8 9
 const newMenu = [...restaurant.mainMenu, 'Gnocci']; //Adds Gnocci to the menu but not changing the original array. It creates a new array under newMenu
@@ -1126,11 +1139,11 @@ console.log(awesomeMenu);
 
 //Spread operators works on all kinds of iterables, not just arrays. An iterable is things like arrays, strings, maps, or sets but NOT OBJECTS.
 
-const string = 'Jonas'
+const string = 'Jonas';
 
 const letters = [...string];
 console.log(letters); //Creates an array ["J", "O", "N", "A", "S"]
-console.log(...string);//J o n a s - creates the individual elements
+console.log(...string); //J o n a s - creates the individual elements
 
 //Multiple values seperated by a comma are usually only expected when we pass arguments into a function or when we build a new array.
 
@@ -1153,12 +1166,12 @@ restaurant.orderPasta(...ingredients); //Here is your delicious pasta with X, Y,
 
 //Objects: Not iterables
 //Below is a shallow copy
-const newRestaurant = {...restaurant, founder: 'Guiseppe', foundedIn: 1998}
+const newRestaurant = { ...restaurant, founder: 'Guiseppe', foundedIn: 1998 };
 console.log(newRestaurant);
 
 //Instead of object.assign()
 
-const restaurantCopy = {...restaurant};
+const restaurantCopy = { ...restaurant };
 restaurantCopy.restaurantName = 'Riestorante Rome';
 console.log(restaurantCopy.restaurantName); //Riestorance Rome
 console.log(restaurant.restaurantName); //Classico Italiano
@@ -1175,28 +1188,32 @@ console.log(arraySpread);
 const [g, f, ...others] = [1, 2, 3, 4, 5];
 console.log(g, f, others); //1 2 [3, 4, 5]
 
-const [pizza, , Risotto, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
-console.log(pizza, Risotto, otherFood);// Pizza Ristotto ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad']
+const [pizza, , Risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, Risotto, otherFood); // Pizza Ristotto ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad']
 
 //Objects
 const { sat, ...weekdays } = restaurant.openingHours; //Restaurant.openingHours (destructuring). The rest takes out sat and creates a new object called weekdays for the remaining properites and values
 console.log(weekdays); //Object {thu, fri} is the new weekdays object
 
 //Functions
-const add = function (...numbers) { //REST = Multiple values and packs it into one array. These are called rest arguments
+const add = function (...numbers) {
+  //REST = Multiple values and packs it into one array. These are called rest arguments
   let sum = 0;
-  for (let i = 0; i < numbers.length; i++ ){
+  for (let i = 0; i < numbers.length; i++) {
     sum += numbers[i];
     console.log(sum); //2, 5 (Because it adds 0+2 then in the next iteration 2+3 =5)
-  };
+  }
   console.log(numbers); //[2,3] //conversion from seperate values into one array
 };
 
-add(2,3) //[2, 3] = 5
-add(5,3,7,2) //[5,3,7,2] = 17
-add(8,2,5,3,2,1,4) //[8,2,5,3,2,1,4] = 25
+add(2, 3); //[2, 3] = 5
+add(5, 3, 7, 2); //[5,3,7,2] = 17
+add(8, 2, 5, 3, 2, 1, 4); //[8,2,5,3,2,1,4] = 25
 
-const t = [23,5,7];
+const t = [23, 5, 7];
 add(...t); //spread operator. Same as writing manually 23, 5, 7 into the function add as arguments
 
 restaurant.orderPizza('Mushrooms', 'Onion', 'Olives', 'Spinach');
@@ -1213,7 +1230,7 @@ console.log(3 || 'Jonas'); //If the first operaant is truthy, it will take the f
 console.log('' || 'Jonas'); //Jonas because it is truthy
 console.log(true || 0); //true because it is truthy
 console.log(undefined || null); //undefined and null are both falsy but no short circuiting so it takes the second value
-console.log(undefined || 0 || '' || 'Hello' || 23 || null ); //Hello because it is the first truthy value (short-circuit)
+console.log(undefined || 0 || '' || 'Hello' || 23 || null); //Hello because it is the first truthy value (short-circuit)
 
 // restaurant.numGuests = 0;
 // // restaurant.numGuests = 23; //This will make line 1220 and 1223 to 23
@@ -1221,30 +1238,29 @@ console.log(undefined || 0 || '' || 'Hello' || 23 || null ); //Hello because it 
 // console.log(guests1); //10 because numGuests doesn't exist so it sets it to 10. Because 0 is a falsy value.
 
 const guests2 = restaurant.numGuests || 10;
-console.log(guests2); //10 // since restaurant.numGuests is undefined it is falsy so it will take the second value which is 10. Alternatively 23 if line 1218 is active because it is the first truthy value even though both 23 and 10 are truthy. 
+console.log(guests2); //10 // since restaurant.numGuests is undefined it is falsy so it will take the second value which is 10. Alternatively 23 if line 1218 is active because it is the first truthy value even though both 23 and 10 are truthy.
 
 console.log('--- AND ----');
 console.log(0 && 'Jonas'); //shows 0, which is the opposite of the OR operator. It returns the first falsy value which in this case is 0.
 console.log(7 && 'Jonas'); //shows 'Jonas', which is the opposite of the OR operator, since the first is truthy and the second is truthy as well.
 
-console.log('Hello' && 23 && null && 'jonas');//Null since it is the first falsy value and the whole evaluation is false so it shortcircuits
+console.log('Hello' && 23 && null && 'jonas'); //Null since it is the first falsy value and the whole evaluation is false so it shortcircuits
 
-if (restaurant.orderPizza) { //If it exists
+if (restaurant.orderPizza) {
+  //If it exists
   restaurant.orderPizza('mushrooms', 'spinach'); //then execute
 }
 
-restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach') //The first part restaurant.orderPizza is the same as line 1231. This will be truthy so it will continue and execute by calling the function orderPizza and passing the arguments.
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach'); //The first part restaurant.orderPizza is the same as line 1231. This will be truthy so it will continue and execute by calling the function orderPizza and passing the arguments.
 
 //OR operator will return the first truthy value of all the operants or the last operant if all the values are falsy
 //On the other hand, the & operator will return the first falsy value or the last value if all of them are truthy
-
 
 //Nullish Coalescing Operator (??)
 
 // restaurant.numGuests = 0;
 const guests = restaurant.numGuests || 10;
 console.log(guests); //10 because 0 is falsy
-
 
 //Nullish values: null and undefined (NOT 0 or ''= truthy values within nullish coalescing operator)
 const guestCorrect = restaurant.numGuests ?? 10;
@@ -1256,7 +1272,7 @@ const rest1 = {
   name: 'Capri',
   // numGuests: 20, //Before nullish
   numGuests: 0, //To demonstrate nullish coalescing operator. Line 1278 will show 10 because 0 is falsy.
-}
+};
 
 const rest2 = {
   name: 'La Piazza',
@@ -1279,9 +1295,41 @@ rest1.owner &&= '<ANONYMOUS>'; //Same as above
 // rest2.owner = rest2.owner && '<ANONYMOUS>' //It will take anonymous because the first one is truthy (There is Giovanni Rossi), therefore it will take the next falsy value
 rest2.owner &&= '<ANONYMOUS>'; //Same as above
 
-
 console.log(rest1.numGuests); //before nullish 20....with nullish it will be 0, because 0 is truthy with nullish
 console.log(rest2.numGuests); //before nullish 10....with nullish it will be 10 because numGuests is undefined so it is falsy therefore choosing 10
 
 console.log(rest1);
 console.log(rest2);
+
+
+//Looping arrays: The for-of loop (ES6). Avoids counters and conditions. 
+
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu); //Combines the two arrays. Array(7) [ "Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad", "Pizza", "Pasta", "Risotto" ]
+
+//Simple for-of loop if its a single line
+for (const item of menu) console.log(item); //All items from the array above will be individually printed. It can be called anything besides item.
+
+for (const item of menu.entries()) {
+  console.log(`${item[0] + 1}: ${item[1]}`);
+  //1: Focaccia script.js:1314:11
+  // 2: Bruschetta script.js:1314:11
+  // 3: Garlic Bread script.js:1314:11
+  // 4: Caprese Salad script.js:1314:11
+  // 5: Pizza script.js:1314:11
+  // 6: Pasta script.js:1314:11
+  // 7: Risotto
+};
+
+//Destructuring version
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1}: ${el}`);
+  //1: Focaccia script.js:1314:11
+  // 2: Bruschetta script.js:1314:11
+  // 3: Garlic Bread script.js:1314:11
+  // 4: Caprese Salad script.js:1314:11
+  // 5: Pizza script.js:1314:11
+  // 6: Pasta script.js:1314:11
+  // 7: Risotto
+};
+
