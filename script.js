@@ -1436,7 +1436,7 @@ if(users.length > 0) console.log(users[0].name); else console.log('User empty ar
 //Looping over keys/properties
 
 const properites = Object.keys(openingHours1);
-console.log(properites);
+console.log(properites);//['thu', 'fri', 'sat']
 
 let openStr = `We are open on ${properites.length} days:`
 for (const day of properites) {
@@ -1447,7 +1447,7 @@ console.log(openStr);
 
 //Property Values
 const values = Object.values(openingHours1)
-console.log(values);
+console.log(values); //Returns an array of 3 objects with open and close keys
 
 const entries = Object.entries(openingHours1);
 console.log(entries);//Returns an array of 3 arrays (Thu,fri,sat)
@@ -1462,4 +1462,41 @@ for (const [day, {open, close}] of entries) { //value was destructured into {ope
   // console.log(`On ${key} we open at ${open} and close at ${close}`); //On thu we open at 12 and close at 22
   console.log(`On ${day} we open at ${open} and close at ${close}`);//Same as above
 }
+
+//Data Structure: Sets (ES6)
+//Sets: A collection of unique values that are never duplicated. It can hold different data types. Sets are also iterables and the order of the elements are irrelevant. There are no indexes and there is no way of getting values out of a set. Use an array if you need to work with the values of the set or if the order of the values matter. One of the main use cases is removing duplicates in an array. 
+
+const ordersSet = new Set([
+  'Pasta', 
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza'
+]);
+
+console.log(ordersSet); //['Pasta', 'Pizza', 'Risotto']. No keys available. 
+console.log(ordersSet.size); //3 . Different from length because it counts the unique values.
+console.log(ordersSet.has('Pizza')); //True //Similar to the includes method. Sees if it Pizza is in the set.
+console.log(ordersSet.has('Bread')); //False.
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');//Ignore the second addition
+console.log(ordersSet); // Set(4) [ "Pasta", "Pizza", "Risotto", "Garlic Bread" ]
+ordersSet.delete('Risotto');//Removes it from the set
+console.log(ordersSet); //Set(3) [ "Pasta", "Pizza", "Garlic Bread" ]
+// ordersSet.clear(); //Remove all items from the set
+
+for (const order of ordersSet) console.log(order); 
+//Pasta
+//Pizza
+//Garlic
+
+//Example of removing duplicates
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']
+// const staffUnique = new Set(staff); //Creates a set
+const staffUnique = [...new Set(staff)] //Conversion to an array. Spread operator works on all iterables, including sets.
+console.log(staffUnique);
+console.log(new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size); //To know the size of the set
+console.log(new Set('Jonas')); //Set(5) [ "J", "o", "n", "a", "s" ]
+console.log(new Set('Jonas').size); //5
 
