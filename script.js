@@ -1500,3 +1500,64 @@ console.log(new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).s
 console.log(new Set('Jonas')); //Set(5) [ "J", "o", "n", "a", "s" ]
 console.log(new Set('Jonas').size); //5
 
+//Data Structure: Maps (ES6). More useful than sets.
+//A data structure that we can use to map values to keys. The keys can be any data type whereas in objects it is always strings.
+
+const rest = new Map();
+rest.set('name', 'classico italiano'); //String property
+rest.set(1, 'Firenze, Italy')//Number property
+rest.set(2, 'Lisbon, Portugal')
+console.log(rest); //Map(3) { name → "classico italiano", 1 → "Firenze, Italy", 2 → "Lisbon, Portugal" }
+
+rest.set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic']).set('open', 11).set('close', 23).set(true, 'We are open :D').set(false, 'We are closed :(')
+console.log(rest);
+// Map(8) { name → "classico italiano", 1 → "Firenze, Italy", 2 → "Lisbon, Portugal", categories → (4) […], open → 11, close → 23, true → "We are open :D", false → "We are closed :(" }
+// ​
+// size: 8
+// ​
+// <entries>
+// ​​
+// 0: name → "classico italiano"
+// ​​
+// 1: 1 → "Firenze, Italy"
+// ​​
+// 2: 2 → "Lisbon, Portugal"
+// ​​
+// 3: categories → Array(4) [ "Italian", "Pizzeria", "Vegetarian", … ]
+// ​​
+// 4: open → 11
+// ​​
+// 5: close → 23
+// ​​
+// 6: true → "We are open :D"
+// ​​
+// 7: false → "We are closed :("
+
+console.log(rest.get('name')); //classico italiano
+console.log(rest.get(true)); //We are open :D
+console.log(rest.get(2)); //Lisbon, Portugal
+
+const time = 21;
+console.log(rest.get(time > rest.get('open') && time < rest.get('close')));  //Is the time between 11 and 23?.//Since the return will be true it will log We are open :D.
+
+console.log(rest.has('categories'));//true. Checks to see if categories exists as a key.
+rest.delete(2);//removes key 2 which is Lisbon Portugal
+// console.log(rest.clear()); //removes all values
+console.log(rest.size);//7 //Checks to see the size of the map
+
+
+// rest.set([1, 2], 'Test'); //adding array as a key. This is in object in memory.
+// console.log(rest);
+// console.log(rest.get([1, 2])); //gives undefined because [1,2] are not the same object in the heap. This one is not in object in memory.
+
+//To make it work
+const arrMap = [1, 2]
+rest.set(arrMap, 'Test');
+console.log(rest);
+console.log(rest.get(arrMap)); //Test
+
+//Object as a key
+rest.set(document.querySelector('h1'), 'Heading')
+console.log(rest);
+
+
