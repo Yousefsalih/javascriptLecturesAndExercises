@@ -1501,7 +1501,7 @@ console.log(new Set('Jonas')); //Set(5) [ "J", "o", "n", "a", "s" ]
 console.log(new Set('Jonas').size); //5
 
 //Data Structure: Maps (ES6). More useful than sets.
-//A data structure that we can use to map values to keys. The keys can be any data type whereas in objects it is always strings.
+//A data structure that we can use to map values to keys. The keys can be any data type whereas in objects it is always strings. It is also iterable.
 
 const rest = new Map();
 rest.set('name', 'classico italiano'); //String property
@@ -1561,3 +1561,45 @@ rest.set(document.querySelector('h1'), 'Heading')
 console.log(rest);
 
 
+//Map Iteration
+const question = new Map([ //Same as the set method but much faster
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'], 
+  [2, 'Java'], 
+  [3, 'JavaScript'], 
+  ['correct', 3], 
+  [true, 'Correct 🎉'], 
+  [false, 'Try again!'],
+]);
+console.log(question);
+
+console.log(Object.entries(openingHours1));//Similar to this (array of arrays)
+const hoursMap = new Map(Object.entries(openingHours1))//conversion into a map
+console.log(hoursMap);
+
+//Quiz App
+console.log(question.get('question'));//What is the best programming language in the world?
+for (const [key, value] of question) {
+  if(typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+
+// const answer = Number(prompt('Your Answer')); //conversion into a number
+const answer = 3; //To avoid the pop up message, otherwise, activate line 1586
+console.log(answer); 
+
+console.log(question.get(question.get('correct') === answer));
+//question.get('correct') : is 3
+//=== answer : This is comparing it to the answer
+//Therefore question.get('correct') === answer , if the answer is 3, the value will be true
+//Next is plugging in the answer to the map again
+//Therefore when the condition is true, it will search via .get for 'true', which will return Correct 🎉, if it is false it will return Try again!
+
+//Convert map to array
+console.log([...question]); 
+console.log([...question.entries()]);
+console.log([...question.keys()]);
+console.log([...question.values()]); 
+console.log(...question.values()); //Without [], it will just be the values. What is the best programming language in the world? C Java JavaScript 3 Correct 🎉 Try again!
+
+
+//Object.entries is a way to convert an object into an iterable
