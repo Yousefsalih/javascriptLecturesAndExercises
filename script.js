@@ -1606,6 +1606,7 @@ console.log(...question.values()); //Without [], it will just be the values. Wha
 
 //String Methods
 //Strings are also zero based similar to arrays.
+//indexOf(), lastIndexOf(), slice() methods
 
 const airline = 'TAP Air Portugal';
 const plane = 'A320';
@@ -1646,7 +1647,7 @@ console.log(new String('jonas'));//string object - What JS does behind the scene
 console.log(typeof new String('jonas')); //object
 console.log(typeof new String('jonas').slice(1)); //string
 
-//Conversion
+//Conversion - toLowerCase(), toUpperCase()
 console.log('YOUSEF'.toLowerCase()); //yousef
 console.log(airline.toLowerCase()); //tap air portugal
 console.log(airline.toUpperCase());//TAP AIR PORTUGAL
@@ -1658,6 +1659,7 @@ const passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(
 console.log(passengerCorrect); //Jonas
 
 //Comparing emails
+//trim(), replace(), replaceAll()
 const email = 'hello@jonas.io';
 const loginEmail = ' Hello@Jonas.Io \n';
 
@@ -1679,6 +1681,7 @@ console.log(announcement.replaceAll('door','gate'));//Replaces all
 console.log(announcement.replaceAll(/door/g, 'gate')); //Regular expression. g stands for global
 
 //Booleans
+//includes(), startsWith(), endsWith()
 const plane2 = 'Airbus A320neo';
 console.log(plane2.includes('A320')); //True
 console.log(plane2.includes('Boeing'));//False
@@ -1703,4 +1706,54 @@ checkBaggage('I have a laptop, some food and a pocket Knife')
 checkBaggage('Socks and camera');
 checkBaggage('Got some snacks and a gun for protection')
 
+//split() and join() string methods
+console.log('A+very+nice+string'.split('+')); //creates an array removing the + and seperating it Array(4) [ "A", "very", "nice", "string" ]
+console.log('Jonas Schmedtmann'.split(' ')); //Array [ "Jonas", "Schmedtmann" ]
+const [firstName2 , lastName2] = 'Jonas Schmedtmann'.split(' ')
+const newName = ['Mr.', firstName2, lastName2.toUpperCase()].join(' '); //joins the array via join between every index
+console.log(newName);
+
+const capitalizeName = function(name) {
+  const names = name.split(' '); //Split the string into an array if there is a space between them
+  const namesUpper = []; //Create a new array to put the capitalized version together
+  for (const n of names) {
+    namesUpper.push(n[0].toUpperCase() + n.slice(1)); //For every index, the first letter or index [0], convert to uppercase and remove index [1] or the second character. Then we push every index back into the array nameUpper
+    //Alternatively we can do the following to get the same result
+    // namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(namesUpper.join(' ')); //Then joins the array into a string by seperating the indexes with a space ' '
+};
+
+capitalizeName('jessica ann smith davis') //Jessica Ann Smith Davis
+capitalizeName('jonas schmedtmann'); //Jonas Schmedtmann
+
+//Padding method - padStart(), padEnd()
+const message = 'Go to gate 23!';
+console.log(message.padStart(25, '+')); //+++++++++++Go to gate 23! //Ensures that the character count is 25 and adds + to fill that gap
+
+console.log(message.padStart(25, '+').padEnd(30, '+')); //+++++++++++Go to gate 23!+++++ //padEnd will add an additional 5 + since the total count should be 30 characters
+
+const maskCreditCard = function (number) {
+  const str = number + '' //turns it into a string, the number called in the function in 1740/1741
+  const last = str.slice(-4) //Takes the last 4 characters
+  return last.padStart(str.length, '*'); //For the last 4 characters, make the pad start (total character count) be the length of the input of the credit card and for the remaining characters input * to fill the gap since it is only 4 characters
+}
+
+
+console.log(maskCreditCard(21353253252)); //*******3252
+console.log(maskCreditCard('21321421513642642'));  //*************2642
+
+//Repeat method - repeat()
+const message2 = 'Bad weather... All departures Delay...';
+console.log(message2.repeat(5)); //repeats 5 times
+//Bad weather... All departures Delay...Bad weather... All departures Delay...Bad weather... All departures Delay...Bad weather... All departures Delay...Bad weather... All departures Delay... script.js:1748:9
+
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'🛩'.repeat(n)}`); //repeat() takes the value 🛩 and repeats it
+}
+
+planesInLine(5); //There are 5 planes in line 🛩🛩🛩🛩🛩 
+planesInLine(3); //There are 3 planes in line 🛩🛩🛩 
+planesInLine(12); //There are 12 planes in line 🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩
 
