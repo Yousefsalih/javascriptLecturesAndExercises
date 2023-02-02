@@ -1603,3 +1603,104 @@ console.log(...question.values()); //Without [], it will just be the values. Wha
 
 
 //Object.entries is a way to convert an object into an iterable
+
+//String Methods
+//Strings are also zero based similar to arrays.
+
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]); //A
+console.log(plane[1]); //3
+console.log('B737'[0]);//B
+console.log(airline.length); //16
+console.log('B737'.length);//5
+
+//index of is the first occurrence
+console.log(airline.indexOf('r')); //6 //Position 6
+
+//lastIndexOf is the last occurrence
+console.log(airline.lastIndexOf('r')); //10 // r in the word portugal. The space counts as a character.
+console.log(airline.indexOf('Portugal')); //8. It is also character sensitive.
+
+console.log(airline.slice(4)); //Air Portugal - Cuts TAP plus the space //This is called a sub string. It doesnt cut the original string. It is impossible to mutate strings because they are primitive.
+
+console.log(airline.slice(4, 7)); //Air Position 7- Position 4 = 3 = Air. End - Beginning.
+
+console.log(airline.slice(0, airline.indexOf(' '))); //TAP
+console.log(airline.slice(airline.lastIndexOf(' ') + 1)); //Portugal
+console.log(airline.slice(-2));//al
+console.log(airline.slice(1, -1)); //starts from 1 and removes the last character = AP Air Portuga
+
+const checkMiddleSeat = function(seat) {
+  //B and E are middle seats
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') console.log('You got the middle seat'); else console.log('You got lucky 😎');
+}
+checkMiddleSeat('11B')//Middle seat
+checkMiddleSeat('23C')//Lucky
+checkMiddleSeat('3E')//Middle seat
+
+//Boxing: Takes string to an object.
+console.log(new String('jonas'));//string object - What JS does behind the scenes whenever a method is called on a string. Whenever the operation is done, the object is converted back to a regular string primitive. All string methods return primitives even if called on a string object. 
+console.log(typeof new String('jonas')); //object
+console.log(typeof new String('jonas').slice(1)); //string
+
+//Conversion
+console.log('YOUSEF'.toLowerCase()); //yousef
+console.log(airline.toLowerCase()); //tap air portugal
+console.log(airline.toUpperCase());//TAP AIR PORTUGAL
+
+//Fix Capitalization in name
+const passenger = 'jOnAS'; //Should be Jonas
+const passengerLower = passenger.toLowerCase(); //jonas
+const passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect); //Jonas
+
+//Comparing emails
+const email = 'hello@jonas.io';
+const loginEmail = ' Hello@Jonas.Io \n';
+
+const lowerEmail = loginEmail.toLowerCase();
+const trimmedEmail = lowerEmail.trim(); //removes the white space (beginning and end)
+console.log(trimmedEmail); //hello@jonas.io
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail); //same as 1666 - hello@jonas.io
+console.log(email === normalizedEmail); //true
+
+//Replacing parts of a string
+const priceGB = '288,97£';
+const priceUS = priceGB.replace('£', '$').replace(',', '.'); //Only first instance replacement
+console.log(priceUS); //288.97$
+const announcement = 'All passengers come to boarding door 23. Boarding door 23!';
+console.log(announcement.replaceAll('door','gate'));//Replaces all 
+
+console.log(announcement.replaceAll(/door/g, 'gate')); //Regular expression. g stands for global
+
+//Booleans
+const plane2 = 'Airbus A320neo';
+console.log(plane2.includes('A320')); //True
+console.log(plane2.includes('Boeing'));//False
+console.log(plane2.startsWith('Airb')); //True
+
+if(plane2.startsWith('Airbus') && plane2.endsWith('neo')) {
+  //Both conditions true so : Part of the NEW Airbus Family
+  console.log('Part of the NEW Airbus Family');
+};
+
+//Practice exercise
+
+const checkBaggage = function(items) {
+  const baggage = items.toLowerCase(); //To simplify under one standard for the condition
+  if(baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are NOT allowed on board');
+  } else {
+    console.log('Welcome aboard!');
+  }
+}
+checkBaggage('I have a laptop, some food and a pocket Knife')
+checkBaggage('Socks and camera');
+checkBaggage('Got some snacks and a gun for protection')
+
+
