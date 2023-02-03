@@ -1887,4 +1887,21 @@ document.body.addEventListener('click', high5); //When the body (page) gets clic
 
 ['Jonas', 'Martha', 'Adam'].forEach(high5); //Because there are 3 elements in the array, each will receive a high5 //👋 3 script.js:1878:11
 
+//Functions returning another function (Important in functional programming paradigm)
+
+const greet = function(greeting) {
+  return function(name) {
+    console.log(`${greeting} ${name}`);
+  }
+}
+
+const greeterHey = greet('Hey'); //Our first function 'greet' returns a NEW function that we stored in 'greeterHey' variable. This is due to a mechanism called closure.
+greeterHey('Jonas'); //Then we can call it//Hey Jonas
+greeterHey('Steven'); //Hey Steven
+
+greet('Hello')('Jonas') //Hello Jonas. Why? Because after the first argument is passed ('Hello'), it becomes the returned function which now 'Jonas' is passed to so it console logs 'Hello Jonas'.
+
+//Using an arrow function instead for the above
+const greetArr = greeting => name => console.log(`${greeting} ${name}`)
+greetArr('Hi')('Yousef')
 
