@@ -1954,5 +1954,23 @@ console.log(swiss);
 
 bookGlobal.call(swiss, ...flightData) //Modern Javascript version of line 1952
 
+//Bind Method - Creates a new function
+const bookEW = bookGlobal.bind(eurowings);
+const bookLH = bookGlobal.bind(lufthansa); 
+const bookLX = bookGlobal.bind(swiss); 
+bookEW(64, 'Steve Jobs') //Does not need call or bind because the this keyword already exists
 
+const bookEW23 = bookGlobal.bind(eurowings, 23); //23 is already passed in the flight number. This is called partial application.
+bookEW23('Yousef Salih') //This will automatically assign it to the name instead. Yousef Salih booked a seat on Eurowings flight EW 23
+bookEW23('Marha Cooper');//Marha Cooper booked a seat on Eurowings flight EW 23 
 
+//With Event Listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function() {
+  console.log(this);
+
+  this.planes++ //+1
+  console.log(this.planes);
+}
+
+document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane)
