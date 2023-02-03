@@ -1972,5 +1972,25 @@ lufthansa.buyPlane = function() {
   this.planes++ //+1
   console.log(this.planes);
 }
+// lufthansa.buyPlane();
 
-document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane)
+document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane.bind(lufthansa))//In an event listener, the this keyword always points to the element in which that handler is attached to. In this case the button - document.querySelector('.buy').
+
+//Partial Application - the order of the argument matters. Therefore, if we want to set the value as fixed, then we need to place that first instead of the rate.
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1,200));//220
+
+const addVAT = addTax.bind(null, 0.23)
+// const addVAT = value => value + value * 0.23; This equivalent to the above code 1983
+console.log(addVAT(100)); //123 because 100 + 100*0.23 (23) = 123
+console.log(addVAT(23));//28.29
+
+const addTaxRate = function(rate) {
+  return function(value) {
+    return value + value * rate;
+  }
+}
+
+const addVAT2 = addTaxRate(0.23)
+console.log(addVAT2(100)); //123
+console.log(addVAT2(23)); //28.29
