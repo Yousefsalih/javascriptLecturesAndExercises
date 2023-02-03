@@ -1800,3 +1800,40 @@ createBooking('LH123', 2, 800); //overwrites default values
 createBooking('LH123', 3); //updates only the first two parameters
 createBooking('LH123', undefined, 2) //undefined refers to the default value or simply undefined
 
+//Passing Arguments into Functions
+const flight = 'LH234';
+const yousef = {
+  name: 'Yousef Salih',
+  passport: 21511631
+}
+
+const checkIn = function(flightNum, passenger) {
+  flightNum = 'LH999'//Not good practice to change the parameter name
+  passenger.name = 'Mr. ' + passenger.name;
+
+  if(passenger.passport === 21511631) {
+    alert('Check In')
+  } else {
+    alert('Wrong passport!')
+  }
+}
+
+checkIn(flight, yousef);
+console.log(flight); //LH234
+console.log(yousef); //Object with updated name //Object { name: "Mr. Yousef Salih", passport: 21511631 }
+
+//Is the same as doing
+// const flightNum = flight; //Passing a primitive type to a function is the same as creating a copy outside of the function
+// const passenger = yousef; //same object in the memory heap (reference)
+
+const newPassport = function(person) {
+  person.passport = Math.trunc(Math.random() * 10000000);
+};
+
+newPassport(yousef);
+checkIn(flight, yousef) //wrong passport alert
+
+//JavaScript does not have passing by reference. Only passing by value. The reference itself is still a value. Its simply a value that contains a memory address. So we pass a reference to the function but we do not pass by a reference. 
+
+
+
