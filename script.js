@@ -1905,3 +1905,54 @@ greet('Hello')('Jonas') //Hello Jonas. Why? Because after the first argument is 
 const greetArr = greeting => name => console.log(`${greeting} ${name}`)
 greetArr('Hi')('Yousef')
 
+//Call Method
+
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNum, name) {
+    console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode} ${flightNum}`);
+    this.bookings.push({flight: `${this.iataCode}${flightNum}`, name}) //flight: "LH239 // ​name: "Yousef Salih" in the bookings array for the first iteration
+
+  },
+}
+
+lufthansa.book(239, 'Yousef Salih');
+lufthansa.book(635, 'Jonas Smith');
+console.log(lufthansa);
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+}
+
+const bookGlobal = lufthansa.book; //
+// book(23, 'Sarah Williams') //In a regular function, the this keyword points to undefined. This keyword depends on how the function is actually called. 
+
+bookGlobal.call(eurowings, 23, 'Sarah Williams') //In the first argument, we want the this keyword to point to it. We called the call method which then calls the book function with the this keyword set to Eurowings. The rest of the arguments are for the book function.
+console.log(eurowings);
+
+bookGlobal.call(lufthansa, 239, 'Mary Cooper') //adds Mary cooper to the bookings array in the object
+console.log(lufthansa);
+
+const swiss = {
+  airline: 'Swiss Air Lines',
+  iataCode: 'LX',
+  bookings: []
+}
+
+bookGlobal.call(swiss, 583, 'James Bond')
+console.log(swiss);
+
+//Apply Method - same as call method except that it doesn't receive a list of arguments after the this keyword (first argument) but instead it takes an array of the arguments
+
+const flightData = [583, 'George Seg'];
+bookGlobal.apply(swiss, flightData) //Not used much in modern javascript
+console.log(swiss);
+
+bookGlobal.call(swiss, ...flightData) //Modern Javascript version of line 1952
+
+
+
