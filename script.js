@@ -1740,40 +1740,63 @@ const maskCreditCard = function (number) {
 }
 
 
-console.log(maskCreditCard(21353253252)); //*******3252
-console.log(maskCreditCard('21321421513642642'));  //*************2642
+// console.log(maskCreditCard(21353253252)); //*******3252
+// console.log(maskCreditCard('21321421513642642'));  //*************2642
 
-//Repeat method - repeat()
-const message2 = 'Bad weather... All departures Delay...';
-console.log(message2.repeat(5)); //repeats 5 times
-//Bad weather... All departures Delay...Bad weather... All departures Delay...Bad weather... All departures Delay...Bad weather... All departures Delay...Bad weather... All departures Delay... script.js:1748:9
+// //Repeat method - repeat()
+// const message2 = 'Bad weather... All departures Delay...';
+// console.log(message2.repeat(5)); //repeats 5 times
+// //Bad weather... All departures Delay...Bad weather... All departures Delay...Bad weather... All departures Delay...Bad weather... All departures Delay...Bad weather... All departures Delay... script.js:1748:9
 
 
-const planesInLine = function (n) {
-  console.log(`There are ${n} planes in line ${'🛩'.repeat(n)}`); //repeat() takes the value 🛩 and repeats it
-}
+// const planesInLine = function (n) {
+//   console.log(`There are ${n} planes in line ${'🛩'.repeat(n)}`); //repeat() takes the value 🛩 and repeats it
+// }
 
-planesInLine(5); //There are 5 planes in line 🛩🛩🛩🛩🛩 
-planesInLine(3); //There are 3 planes in line 🛩🛩🛩 
-planesInLine(12); //There are 12 planes in line 🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩
+// planesInLine(5); //There are 5 planes in line 🛩🛩🛩🛩🛩 
+// planesInLine(3); //There are 3 planes in line 🛩🛩🛩 
+// planesInLine(12); //There are 12 planes in line 🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩
 
-//Refactor 1770
-const getCode = str => str.slice(0, 3).toUpperCase();
+// //Refactor 1770
+// const getCode = str => str.slice(0, 3).toUpperCase();
 
-//String Method Exercise
-//Transform flights into line 1768-1771
-const flights =
-  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+// //String Method Exercise
+// //Transform flights into line 1768-1771
+// const flights =
+//   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
-for (const flight of flights.split('+')) {
-  const [type, from, to, time] = flight.split(';');
-  const output = `${type.startsWith('_Delayed') ? '🔴' : ''}${type.replaceAll('_', ' ')} ${from.slice(0,3).toUpperCase()} to ${getCode(to)} (${time.replace(':', 'h')})`.padStart(40)
-  console.log(output);
-}
-
+// for (const flight of flights.split('+')) {
+//   const [type, from, to, time] = flight.split(';');
+//   const output = `${type.startsWith('_Delayed') ? '🔴' : ''}${type.replaceAll('_', ' ')} ${from.slice(0,3).toUpperCase()} to ${getCode(to)} (${time.replace(':', 'h')})`.padStart(40)
+//   console.log(output);
+// }
 
 //Final result:
   //// 🔴 Delayed Departure from FAO to TXL (11h25)
 //              Arrival from BRU to FAO (11h45)
 //   🔴 Delayed Arrival from HEL to FAO (12h05)
 //            Departure from FAO to LIS (12h30)
+
+//Default parameters
+
+const reservations = []
+
+const createBooking = function(flightNum, numPassengers = 1, price = 199 * numPassengers) { //ES6 is putting the default directly
+  //ES5 way
+  // numPassengers = numPassengers || 1; //Creating a default value if the first value is falsy
+  // price = price || 199; //Default value
+  const booking = {
+    flightNum,
+    numPassengers,
+    price
+  }
+  console.log(booking);
+  reservations.push(booking) //Push the object into the array bookings
+}
+
+createBooking('LH123');
+console.log(reservations);
+createBooking('LH123', 2, 800); //overwrites default values
+createBooking('LH123', 3); //updates only the first two parameters
+createBooking('LH123', undefined, 2) //undefined refers to the default value or simply undefined
+
