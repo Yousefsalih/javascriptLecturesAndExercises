@@ -1835,5 +1835,56 @@ checkIn(flight, yousef) //wrong passport alert
 
 //JavaScript does not have passing by reference. Only passing by value. The reference itself is still a value. Its simply a value that contains a memory address. So we pass a reference to the function but we do not pass by a reference. 
 
+//First-Class Vs. Higher-Order Functions
+
+//First-Class Functions:
+//JavaScript treats functions as first-class citizens
+//This means that functions are simply values
+//Functions are just another "type" of object. Objects and functions are values. Because they are values, we can store them in variables or properties and we can pass them as arguments in other functions (such as an event listener). We can return functions from other functions. Functions are objects and they come with their own methods.
+
+//Higher-Order functions
+//A function that receives another function as an argument that returns a new function or both
+//This is only possible because of first class functions
+//Ex: AddEventListener() is a higher-order function that receives a callback function
+//Function that returns a new function:
+function count() { //Higher-order function
+  let counter = 0;
+  return function() { //Returned Function
+    counter++;
+  };
+};
+
+//Lower-order function (Lower level of abstraction) in this context
+const oneWord = function(str){
+  return str.replace(/ /g, '').toLowerCase() //removes the space and replaces it with nothing and then makes it into lower case
+}
+
+//Lower-order function (Lower level of abstraction) in this context
+const upperFirstWord = function(str) {
+  const [first, ...others] = str.split(' '); //Convert into an array by splitting the values through the space that exists
+  return [first.toUpperCase(), ...others].join(' '); //Make the first index uppercase and join the remaining using a space
+};
+
+
+//Higher-order function (higher level of abstraction) because it takes fn (call back function) as an argument.
+const transformer = function(str, fn) {
+  console.log(`Original string: ${str}`); //Original string: JavaScript is the best!
+  console.log(`Transformed string: ${fn(str)}`); //Transformed string: JAVASCRIPT is the best! . The function is called within the higher-order function and takes the same value 'str', which is the argument passed in line 1874.
+  console.log(`Transformed by: ${fn.name}`); //Transformed by: upperFirstWord. This is the name of the function by functions have both methods and properties.
+}
+
+transformer('JavaScript is the best!', upperFirstWord);
+transformer('JavaScript is the best!', oneWord); //Transformed string: javascriptisthebest! 
+
+const high5 = function(){
+  console.log('👋');
+};
+
+
+//JavaScript uses callbacks all the time: Reusable, abstraction
+//Abstraction: Hiding the detail of some code implementation becuase we do not care about all the details in the context of where it is applied. It allows us to think about problems at a higher more abstract level. Ex: Transformer does not care about how upperFirstWord and oneWord function work.
+document.body.addEventListener('click', high5); //When the body (page) gets clicked, high5 is called which will console log the emoji
+
+['Jonas', 'Martha', 'Adam'].forEach(high5); //Because there are 3 elements in the array, each will receive a high5 //👋 3 script.js:1878:11
 
 
