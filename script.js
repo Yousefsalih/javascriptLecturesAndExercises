@@ -1994,3 +1994,25 @@ const addTaxRate = function(rate) {
 const addVAT2 = addTaxRate(0.23)
 console.log(addVAT2(100)); //123
 console.log(addVAT2(23)); //28.29
+
+
+//Immediately Invoked Function Expressions (IIFE): A function called once only and then it dissapears. Useful in async/await.
+
+(function() { //This is a function value which mimics a function expression
+  console.log('This will never run again');
+  const isPrivate = 23; //This private or data that is encapsulated (inside the function scope). It is not accessed by the global scope.
+})();//Then we immediately call the function
+
+(() => console.log('This will also never run again'))(); //Arrow function IIFE
+
+{ //To create a scope for data privacy, in modern JS we can just create a block which protects const and let variables from being accessed. For this reason, IIFE are not as useful. It is good just for executing a function once. 
+  const isPrivate = 23;
+  let isPrivateToo = 22;
+  var notPrivate = 46;
+}
+
+// console.log(isPrivateToo); //Not defined
+console.log(notPrivate); //46
+
+
+
