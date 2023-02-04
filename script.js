@@ -2136,3 +2136,23 @@ movements.forEach(function (movement, i, array) {
   }
   console.log(array); //movements array
 });
+
+//ForEach() Method on Map and sets. The parameter starts with the value, key, map similar to an array.
+
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach(function(value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+
+//Set: Same as map and array except the second parameter is the same parameter as the first. This is because the developers did not want confusion between the different data structures.
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR'])
+
+currenciesUnique.forEach(function (value, _, map) {
+  console.log(`${value}: ${_}`); //First iteration example : USD: USD. 
+});
+
