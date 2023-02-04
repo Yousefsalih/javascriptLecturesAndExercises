@@ -2014,5 +2014,56 @@ console.log(addVAT2(23)); //28.29
 // console.log(isPrivateToo); //Not defined
 console.log(notPrivate); //46
 
+//Closures
+//It happens automatically not explicitly
+//Example 1
+const secureBooking = function() {
+  let passengerCount = 0;
+  return function() { //booker function
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  }
+}
 
+const booker = secureBooking(); //Booker is the return function that takes note of the first initial values of the secureBooking function but afterwards begins executing on its own. This is due to closure. Booker function is in the global environment/scope. It is the environment in which function was created.
+booker(); //1 passengers
+booker(); //2 passengers
+booker(); //3 passengers
 
+// console.dir(booker); //Shows the secureBooking variable closure
+
+//Example 2
+let u;
+const v = function() {
+  const a = 23;
+  u = function() {//U function really does close over any variables of the execution context in which it was defined. Even when the variable itself 2035 not defined in the variable environment of the v function. a variable is inside the f function.
+    console.log(a * 2);//46
+  };
+};
+
+const e = function() {
+  const b = 777;
+  u = function () {
+    console.log(b * 2);
+  }
+}
+
+v(); //Assigns the global u variable with the u function. 
+u(); //Updates the console to 46. It now has access to the a variable and keeps it. 
+e(); //Re-assigning the u function
+u(); //1554. Closed over the variable environment of e function. This is how it can access the b variable. No longer access to the v function.
+
+console.dir(u);
+
+//Example 3:
+const boardPassengers = function(n, wait) {
+  const perGroup = n / 3;
+  setTimeout(function(){
+    console.log(`We are now boarding all ${n} passengers`); //Gets executed after 3 seconds
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);// After 3 seconds
+  }, wait * 1000); //1000 milliseconds = 1 second
+  console.log(`Will start boarding in ${wait} seconds`); //#1 gets executed first
+}
+
+const perGroup = 1000; //Due to closure, it will ignore this value and close over the perGroup variable in the boardPassengers function and use that instead.
+boardPassengers(180, 3);
