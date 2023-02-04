@@ -2106,3 +2106,33 @@ console.log(arr1[arr1.length - 1]); //64. To get the last position of the array.
 console.log(arr1.slice(-1)[0]); //64 Alternative way
 console.log(arr1.at(-1));//64//New way to achieve the same as above.
 console.log('jonas'.at(0)); //j . It also works on strings.
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+for (const [i, movement] of movements.entries()) {
+  //To access the counter variable
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`); //.abs() removes the negative sign and returns the absolute value
+  }
+}
+
+//Previous way of going through the array
+// for (const movement of movements) {
+//     if (movement > 0) {
+//       console.log(`You deposited ${movement}`);
+//     } else {
+//       console.log(`You withdrew ${Math.abs(movement)}`); //.abs() removes the negative sign and returns the absolute value
+//     }
+//   };
+
+//Alternatively use a forEach() method: Higher-order function. It passes the value, index, and array. The order matters. Continue and break statements do not work in a forEach loop. Therefore, you can't break out of the loop.
+movements.forEach(function (movement, i, array) {
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`); //.abs() removes the negative sign and returns the absolute value
+  }
+  console.log(array); //movements array
+});
