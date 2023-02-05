@@ -2197,6 +2197,27 @@ console.log(movementsDescriptions);
 
 //Filter Method: Filter returns a new array containing the array elements that passed a specified test condition.
 
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+console.log(deposits); //New array that removes the negative values
+
+//Using a for of loop
+const depositsForOf = [];
+  for (const mov of movements) {
+  mov > 0 ? depositsForOf.push(mov) : null
+}
+
+console.log(depositsForOf); //Removes the negative values
+
+const withdrawals = movements.filter(function (mov) {
+  return mov < 0
+})
+
+console.log(withdrawals); //Only negative values
+
+//A big advantage to using a method vs a for of loop is for chaining methods.
+
 //Reduce Method: Reduces (boils down) all array elements down to one single value (e.g adding all elements together). We need an accumulator variable (acc) + current iteration in the array. Therefore the array no longer exists and it will return one value.
 
 
