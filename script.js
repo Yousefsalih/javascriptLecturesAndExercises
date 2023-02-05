@@ -2220,4 +2220,28 @@ console.log(withdrawals); //Only negative values
 
 //Reduce Method: Reduces (boils down) all array elements down to one single value (e.g adding all elements together). We need an accumulator variable (acc) + current iteration in the array. Therefore the array no longer exists and it will return one value.
 
+const balance = movements.reduce(function(acc, cur, i){ //Reduce method takes an accumulator(acc) --> like a snowball or sum. current value =cur.
+  console.log(`Iteration ${i}: ${acc}`);
+  return acc + cur
+}, 0) //Takes a second argument or parameter which is the initial value of the accumulator
+console.log(balance); //3840
 
+//Using a for of loop
+let sum = 0;
+
+for (const mov of movements) {
+  sum+= mov
+  console.log(sum);
+}
+
+console.log(sum);//3840
+
+//Maximum value
+const max = movements.reduce((acc, mov) => {
+  if(acc > mov)
+  return acc;
+  else
+    return mov
+}, movements[0])
+
+console.log(max); //3000
