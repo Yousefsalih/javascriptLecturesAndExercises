@@ -2245,3 +2245,10 @@ const max = movements.reduce((acc, mov) => {
 }, movements[0])
 
 console.log(max); //3000
+
+//Chaining Method: We can only chain it is an array
+//PIPELINE
+//For troubleshooting, use the array and index parameters
+const totalDepositsUSD = movements.filter(mov => mov > 0).map(mov => mov * eurToUsd).reduce((acc, mov) => acc + mov, 0);
+
+console.log(totalDepositsUSD); //5522
