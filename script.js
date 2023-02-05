@@ -2252,3 +2252,10 @@ console.log(max); //3000
 const totalDepositsUSD = movements.filter(mov => mov > 0).map(mov => mov * eurToUsd).reduce((acc, mov) => acc + mov, 0);
 
 console.log(totalDepositsUSD); //5522
+
+//Find Method: Retrieve element of an array as it loops based on a specified condition. It retrieves the first only unlike the filter method. The filter method returns a new array whereas Find method only returns the element itself.
+
+const firstWithdrawal = movements.find(mov => mov < 0) //If true
+console.log(movements);
+console.log(firstWithdrawal);//-400
+
