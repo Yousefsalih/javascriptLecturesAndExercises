@@ -2156,3 +2156,47 @@ currenciesUnique.forEach(function (value, _, map) {
   console.log(`${value}: ${_}`); //First iteration example : USD: USD. 
 });
 
+//Data Transformations with Map, Filter, and Reduce in Arrays
+
+//Map Method
+//Similar to ForEach method, except that it creates a new array by looping over the original array. ForEach method creates side effects whereas map methods return values.
+
+const eurToUsd = 1.1;
+const movementsUSD = movements.map(function(mov) { //This is more aligned with functional programming
+  return mov * eurToUsd;
+});
+
+// const movementsUSD = movements.map(mov => mov * eurToUsd); //Same as above using arrow function
+
+console.log(movementsUSD); //new array with updated values
+console.log(movements); // does not affect original array
+
+//Same as above using a for of loop
+const movementUSDFor = []
+for (const mov of movements) {
+  movementUSDFor.push(mov * eurToUsd)
+};
+console.log(movementUSDFor);
+
+//It is the map method that calls the callback function for each array element in the movements array. 
+const movementsDescriptions = movements.map((mov, i) => {
+  //Using a ternary operator
+  return `Movement ${i + 1}: You ${
+    mov > 0 ? 'deposited' : 'withdrew'
+  } ${Math.abs(mov)}`;
+  //Using an if else statement
+  // if (mov > 0) {
+  //   return `Movement ${i + 1}: You desposited ${mov}`; //Always use a return in a map method
+  // } else {
+  //   return `Movement ${i + 1}: You withdrew ${Math.abs(mov)}`;
+  // }
+})
+
+console.log(movementsDescriptions);
+
+
+//Filter Method: Filter returns a new array containing the array elements that passed a specified test condition.
+
+//Reduce Method: Reduces (boils down) all array elements down to one single value (e.g adding all elements together). We need an accumulator variable (acc) + current iteration in the array. Therefore the array no longer exists and it will return one value.
+
+
