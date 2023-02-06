@@ -2259,3 +2259,18 @@ const firstWithdrawal = movements.find(mov => mov < 0) //If true
 console.log(movements);
 console.log(firstWithdrawal);//-400
 
+
+//EQUALITY
+console.log(movements.includes(-130)); //.includes method returns a boolean value, in this case true that the value -130 in the movements array exists
+
+//SOME: CONDITION
+console.log(movements.some(mov => mov === -130)); //.some() method returns a boolean as well via a condition for ANY of the movements that are TRUE.
+
+//EVERY: Similar to some() except, that EVERY element satisfy the condition
+console.log(movements.every(mov => mov > 0));//False because some are negative values even though some of the values are true
+
+//Separate Callback as an argument for the methods
+const deposit = mov => mov > 0;
+console.log(movements.every(deposit));
+console.log(movements.some(deposit));
+console.log(movements.filter(deposit));
