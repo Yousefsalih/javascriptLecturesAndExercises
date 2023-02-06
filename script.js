@@ -2274,3 +2274,11 @@ const deposit = mov => mov > 0;
 console.log(movements.every(deposit));
 console.log(movements.some(deposit));
 console.log(movements.filter(deposit));
+
+//Flat and flatMap methods
+const arr4 = [[1, 2, 3], [4, 5, 6], 7, 8]
+console.log(arr4.flat()); //flatten all the arrays within the array, making it one whole array
+
+const arrDeep = [[[1,2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(3)); //Flat method only goes one level deep, by default puts 1 as the argument. Therefore, putting in 3 will go 3 levels deep.
+
