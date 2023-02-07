@@ -2318,3 +2318,24 @@ movements.sort((a, b) => {
 
 console.log(movements);
 
+//Array constructor. Creating an array programmatically.
+const x = new Array(7); //creates 7 empty slots
+console.log(x);
+x.map(() => 5) //This will not work
+
+//We can use the fill method
+x.fill(1,1) //first value will fill up the value wanted. The second value is the start point at which the value will be inserted. 
+console.log(x); //Array(7) [ <1 empty slot>, 1, 1, 1, 1, 1, 1 ]
+
+const arr5 = [123, 315, 46, 4266, 42, 6426, 426];
+arr5.fill(11, 2, 5)//Starting from index 2-4 and then continues as per the array above
+console.log(arr5); //Array(7) [ 123, 315, 11, 11, 11, 6426, 426 ]
+
+//Array.from. Array is a function and from is a method.
+const y = Array.from({length: 7}, () => 1); //In each iteration it will return a 1
+console.log(y); //Array(7) [ 1, 1, 1, 1, 1, 1, 1 ]
+const z = Array.from({length: 7}, (_, i) => i + 1) //i is the index for each iteration
+console.log(z); //Array(7) [ 1, 2, 3, 4, 5, 6, 7 ]
+
+
+
