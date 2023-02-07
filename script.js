@@ -2337,5 +2337,22 @@ console.log(y); //Array(7) [ 1, 1, 1, 1, 1, 1, 1 ]
 const z = Array.from({length: 7}, (_, i) => i + 1) //i is the index for each iteration
 console.log(z); //Array(7) [ 1, 2, 3, 4, 5, 6, 7 ]
 
+//Exercise: Combine methods of strings and arrays. We want to make sentences capitalized except for a few words.
+
+const convertTitleCase = function (title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1)
+
+
+  const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+  const titleCase = title.toLowerCase().split(' ').map(word => exceptions.includes(word) ? word : capitalize(word)
+  ).join(' ')
+  return capitalize(titleCase);
+};
+
+console.log(convertTitleCase('this is a nice title')); //This Is a Nice Title
+console.log(convertTitleCase('and here is another title with an EXAMPLE')); //And Here Is Another Title with an Example
+
+
 
 
