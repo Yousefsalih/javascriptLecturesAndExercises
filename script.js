@@ -2282,3 +2282,39 @@ console.log(arr4.flat()); //flatten all the arrays within the array, making it o
 const arrDeep = [[[1,2], 3], [4, [5, 6]], 7, 8];
 console.log(arrDeep.flat(3)); //Flat method only goes one level deep, by default puts 1 as the argument. Therefore, putting in 3 will go 3 levels deep.
 
+//Sort Method
+
+//Strings sorting
+const owners = ['Yousef', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort()); //Alphabetical A-Z. Works with strings only.
+console.log(owners); //Mutates the original array
+
+//Numbers sorting
+//Return < 0 A, B (keep order)
+//Return > 0 B, A (switch order)
+console.log(movements);
+
+//Ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// })
+
+//Descending
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// })
+
+//Ascending alternative
+movements.sort((a, b) => {
+  return a-b;
+});
+
+//Descending alternative
+movements.sort((a, b) => {
+  return b-a;
+});
+
+console.log(movements);
+
