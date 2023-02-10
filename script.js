@@ -2354,5 +2354,119 @@ console.log(convertTitleCase('this is a nice title')); //This Is a Nice Title
 console.log(convertTitleCase('and here is another title with an EXAMPLE')); //And Here Is Another Title with an Example
 
 
+//Numbers: All numbers are represented internally as floating point numbers (always as decimals). One data type for all numbers. They are reperesented internally in a 64 base 2 format, which means numbers are always stored in a binary format (only composed of 0's and 1's). Base 10 = 0 to 9, whereas binary base 2 is 0 and 1. Some numbers that are fractional like 0.1 is difficult to represent in jS. 
+console.log(0.1 + 0.2);//0.30000004
+console.log(0.1 + 0.2 === 0.3);//false
 
+console.log(23 === 23.0);//true
 
+//Conversion
+console.log(Number('23'));//Convert to number
+console.log(+'23');//Easier
+
+//Parsing
+console.log(Number.parseInt('30px', 10));//Try to figure out the number in the string, it must start with a number//30
+console.log(Number.parseInt('e23'));//will not work NaN because it doesnt start with the number
+
+console.log(Number.parseInt('    2.5rem'));//2//Stops at decimal point
+console.log(Number.parseFloat('   2.5rem'));//2.5
+
+//Check if value is NaN - Not a Number
+console.log(Number.isNaN(20));//false, it is a number
+console.log(Number.isNaN('20'));//False
+console.log(Number.isNaN(+'20'));//True NaN
+
+//Checking if value is number (Best way, a real number not a string)
+console.log(Number.isFinite(20)); //true
+console.log(Number.isFinite('20')); //false
+console.log(Number.isFinite(+'20')); //true
+console.log(Number.isFinite(23 / 0)); //Infinity//false because not finite
+
+//Math and Rounding. Math namespace object.
+console.log(Math.sqrt(25));//5
+console.log(25 ** (1 / 2));//5
+console.log(8 ** (1 / 3));//2
+console.log(Math.max(5, 18, 23, 11, 2)); //23
+console.log(Math.max(5, 18, '23', 11, 2)); //23 - does type coercion
+console.log(Math.max(5, 18, '23px', 11, 2)); //NaN
+console.log(Math.min(5, 18, '23', 11, 2));///2
+console.log(Math.PI * Number.parseFloat('10px') ** 2);//PI is 3.14159...//radius is 10px  = This will calculate the area with a 10px radius circle =314.159265.
+console.log(Math.trunc(Math.random() * 6) + 1); //random is between 0 and 1, trunc makes it no decimals and 6 + 1 is betwen 0 and 6.
+
+//Random number between numbers
+const randomInt = (min, max) => Math.trunc(Math.random () * (max - min) + 1) + min;
+///Between 0 and 1 multiplied by (max - min) ---> then min to(max - min + min (which is max). This is the range between min-max value
+console.log(randomInt(10,20)); //Random number between 10 and 20
+
+//Rounding integers
+console.log(Math.trunc(23.3));//23 //removes decimal
+console.log(Math.trunc(23.9));//23
+console.log(Math.round(23.3));//23 //rounds up or down
+console.log(Math.round(23.9));//24
+console.log(Math.floor(23.3));//23 always rounded down
+console.log(Math.floor(23.9));//23
+console.log(Math.ceil(23.3));//24 always rounded up
+console.log(Math.ceil('23.9'));//24 also does type coercion for these methods
+console.log(Math.trunc(-23.3));//-23
+console.log(Math.floor(-23.3));//-24 //Better than trunc because it actually takes in the decimal too as a factor
+
+//Rounding decimals
+console.log((2.7).toFixed(3)); //toFixed always returns a string and not a number //2.700
+console.log(+(2.7).toFixed(0)); //toFixed always returns a string and not a number //3 //Now with + converted to a number//3
+
+//Process: Number is a primitive and primitives dont have methods so behind the scenes JavaScript will do boxing, which is transforming into a number object then call the method on that object and once the operation is finished it will convert it back to a primitive.
+
+//Remainder Operator
+console.log(5 % 2); //1
+console.log(5 / 2);//2.5 //5= 2 + 2 + 1
+console.log(8 % 3); //2
+console.log(8 / 3); //2.666
+console.log(6 % 2); //0 because it is divisible by 2 because 6 is an even number
+console.log(7 / 2); //3.5
+
+const isEven = n => n % 2 === 0;
+console.log(isEven(8)); //true
+console.log(isEven(23)); //false
+
+//Numeric Seperators: //Underscores can only be placed between numbers, not at the beginning or end either or made beside eachother repeatedly. It should only be used in the code and not in methods like Number() or parseInt() or for parsing.
+const diameter = 287_460_000_000;
+console.log(diameter);//287460000000
+const priceCents = 345_99;
+console.log(priceCents);//34599
+
+const transferFee1 = 15_00;
+const transferFee2 = 15_00;
+console.log(transferFee1); //1500
+console.log(transferFee2);//1500
+
+const PI = 3.14_15 
+console.log(PI); //3.1415
+
+console.log(Number('230_000'));//NaN. Does not work. 
+
+//BigInt (ES2020) - Big integers that can store numbers as large as we want
+console.log(2 ** 53 - 1);//9007199254740991  //Biggest number JS can represent
+console.log(Number.MAX_SAFE_INTEGER);//same as above 9007199254740991
+console.log(2 ** 53 + 2);//unsafe numbers
+console.log(2 ** 53 + 5);//unsafe numbers
+console.log(995435435464373473463543543584395843985943860987908479n);//Now it shows us the actual number 995435435464373473463543543584395843985943860987908479n
+console.log(BigInt(95435435));//95435435n - Not good for huge numbers but just transforms it to a big int number type
+
+//Operations
+console.log(10000n + 10000n);//20000n
+console.log(21591059013950n * 21312521531513n); //460159910122977217631606350n
+const huge = 23151632632062n;
+const normalNum = 23;
+// console.log(huge * normalNum);//error because BigInt numbers cannot be mixed with a regular number. So it needs to be converted first
+console.log(huge * BigInt(normalNum));//532487550537426n
+
+//Exceptions to mixing types
+console.log(20n > 15);//true
+console.log(20n === 20);//false
+console.log(20n == 20);//true
+console.log(huge + ' is REALLY big!!!'); //string concat //23151632632062 is REALLY big!!!
+
+//Divisions
+console.log(10n / 3n); //3n because it is an integer, which returns the closest number
+console.log(20n / 3n); //4n because it is an integer, which returns the closest number
+console.log(10 / 3 ); //3.3333333333333335
