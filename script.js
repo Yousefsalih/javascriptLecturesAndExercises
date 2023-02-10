@@ -2470,3 +2470,39 @@ console.log(huge + ' is REALLY big!!!'); //string concat //23151632632062 is REA
 console.log(10n / 3n); //3n because it is an integer, which returns the closest number
 console.log(20n / 3n); //4n because it is an integer, which returns the closest number
 console.log(10 / 3 ); //3.3333333333333335
+
+//Create a date
+
+const now = new Date();
+console.log(now); //current date and time
+
+//Parse the date
+console.log(new Date('Fri Feb 10 2023 12:36:08 GMT+0300 (GMT+03:00)'));
+
+//UTZ is the coordinated Universal Time, which is the time without any time zone in London and also without day light savings. 
+
+//Working with dates
+
+console.log(new Date(2037, 10, 19, 15, 23, 5)); //Date Thu Nov 19 2037 15:23:05 GMT+0300 (GMT+03:00) //month is ZERO based so November is 10 instead of 11. 
+
+console.log(new Date(2037, 10, 31)); //auto corrects day. Since november is 30 days, it will auto correct to dec 1 (next day feature)
+console.log(new Date(0));//the amount of milliseconds passed since the beginning of the unix time which is January 1 1970. //Date Thu Jan 01 1970 02:00:00 GMT+0200 (GMT+03:00)
+console.log(new Date(3 * 24 * 60 * 60 * 1000)); //Date Sun Jan 04 1970 02:00:00 GMT+0200 (GMT+03:00)
+
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future); //Date Thu Nov 19 2037 15:23:00 GMT+0300 (GMT+03:00)
+console.log(future.getFullYear()); //2037
+console.log(future.getMonth());//10
+console.log(future.getDate());//19
+console.log(future.getDay()); //4th day of the week
+console.log(future.getHours()); //15
+console.log(future.getMinutes());//23
+console.log(future.getSeconds());//0
+console.log(future.toISOString()); //2037-11-19T12:23:00.000Z. Converting a date object into a string for storage and reuse.
+console.log(future.getTime()); //2142246180000 millseconds that have passed since Jan 1 1970
+console.log(new Date(2142246180000)); //reverse the above will give a date Date Thu Nov 19 2037 15:23:00 GMT+0300 (GMT+03:00)
+
+console.log(Date.now());//1676022968265 current time stamp
+
+future.setFullYear(2040); //Updates the year
+console.log(future); //Date Mon Nov 19 2040 15:23:00 GMT+0300 (GMT+03:00)
