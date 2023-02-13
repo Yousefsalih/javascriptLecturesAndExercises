@@ -2506,3 +2506,49 @@ console.log(Date.now());//1676022968265 current time stamp
 
 future.setFullYear(2040); //Updates the year
 console.log(future); //Date Mon Nov 19 2040 15:23:00 GMT+0300 (GMT+03:00)
+
+//Working with dates
+
+const calcDaysPassed = (date1, date2) => Math.abs(date2 - date1) / (1000 * 60 * 60 * 24)
+const days1 = calcDaysPassed(new Date(2037, 3, 14), new Date(2037, 3, 24));
+console.log(days1); //10 days
+
+//Working with numbers using Internationalization API
+
+const num = 43643743.34
+
+const options = {
+  style: 'currency', //'percent' or 'currency' or 'unit'
+  unit: 'mile-per-hour', //or celsius
+  currency: 'EUR', //We need to define currency. It is not determined by the locale. It is possible to show EUR in the USA. It needs to be done manually.
+  useGrouping: false, //removes the seperators , .
+}
+
+console.log('US: ', new Intl.NumberFormat('en-US', options).format(num)); //US:  43,643,743.34
+
+console.log('Germany: ', new Intl.NumberFormat('de-DE', options).format(num)); //Germany:  43.643.743,34
+console.log('Syria: ', new Intl.NumberFormat('ar-SY', options).format(num));// Syria:  ٤٣٬٦٤٣٬٧٤٣٫٣٤
+console.log(`Browser ${navigator.language} : ${new Intl.NumberFormat(navigator.language).format(num)}`); //Browser en-CA : 43,643,743.34 
+
+//Working with Timers
+//setTimeout: A specific time that once reached ends at a defined time
+//SetInterval: Keeps running until stopped manually
+
+// setTimeout((ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2} 🍕`), 3000, 'olives', 'spinach') //Takes a function as an argument. Second argument is the time when the callback function is called in milliseconds. 3000 is 3 seconds later. The 3rd and 4th arguments become the first and second parameters for the function.
+// //Here is your pizza with olives and spinach 🍕
+
+//Alternative to the above
+const ingredients = ['olives', 'spinach']
+const pizzaTimer = setTimeout((ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2} 🍕`), 3000, ...ingredients)
+
+if (ingredients.includes('spinach')) clearTimeout(pizzaTimer) //This will prevent the pizzaTimer from executing since it has spinach in it
+
+
+console.log(`Waiting...`);//This will show up first and JavaScript will register the callback function for the SetTimeOut and only execute after 3 seconds. This is due to a mechanism called Asynchronous JavaScript.
+
+//SetInterval
+setInterval(function() {
+  const now = new Date();
+  // console.log(now); //Every second a new date is logged, the time now
+}, 1000)
+
